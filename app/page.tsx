@@ -1,101 +1,203 @@
+"use client";
+
+import FeedbackCard from "@/components/cards/FeedbackCard";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [toggleCategory, setToggleCategory] = useState("All");
+  const [sortby, setSortby] = useState("Most Upvotes");
+  const [showSortbyOptions, setSortbyOptions] = useState(false);
+  const [categories, setCategories] = useState([
+    "All",
+    "Ul",
+    "UX",
+    "Enchancement",
+    "Bug",
+    "Feature",
+  ]);
+  const [feedbacks, setFeedbacks] = useState([
+    {
+      id: 1,
+      upvotes: 112,
+      header: "Add tags for solutions",
+      detail: "Easier to search for solutions based on a specific stack.",
+      category: "Enhancement",
+      comments: ["1", "2"],
+    },
+    {
+      id: 2,
+      upvotes: 99,
+      header: "Add a dark theme option",
+      detail:
+        "It would help people with light sensitivities and who prefer dark mode.",
+      category: "Feature",
+      comments: ["1", "2", "3", "4"],
+    },
+    {
+      id: 3,
+      upvotes: 65,
+      header: "Q&A within the challenge hubs",
+      detail: "Challenge-specific Q&A would make for easy reference.",
+      category: "Feature",
+      comments: ["1"],
+    },
+  ]);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="container flex gap-6 ">
+      <div className="w-[255px] flex flex-col gap-6">
+        <div className="h-[137px] flex flex-col justify-end bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
+          <h4 className="font-bold">Frontend Mentor</h4>
+          <p className="text-sm opacity-85">Feedback Board</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="bg-white rounded-lg p-4">
+          <div className="flex gap-2 text-xs text-white flex-wrap">
+            {categories.map((category: any) => (
+              <button
+                key={category}
+                className={`px-3 py-2 rounded-lg font-semibold ${
+                  toggleCategory === category
+                    ? "bg-[#4661e6]"
+                    : "bg-[#f2f4ff] text-[#4661e6]"
+                }`}
+                onClick={() => setToggleCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 p-4 bg-white rounded-lg">
+          <div className="flex justify-between">
+            <h4 className="font-bold">Roadmap</h4>
+            <Link href={"/"} className="text-sm underline pb-2 text-[#4661e6]">
+              View
+            </Link>
+          </div>
+          <div className="flex justify-between">
+            <div className="flex place-items-center gap-4">
+              <span className="inline-block size-2 rounded-full bg-[#f49f85]" />
+              <span className="opacity-65">Planned</span>
+            </div>
+            <span className="font-bold">2</span>
+          </div>
+          <div className="flex justify-between">
+            <div className="flex place-items-center gap-4">
+              <span className="inline-block size-2 rounded-full bg-[#ad1fea]" />
+              <span className="opacity-65">In-Progress</span>
+            </div>
+            <span className="font-bold">3</span>
+          </div>
+          <div className="flex justify-between">
+            <div className="flex place-items-center gap-4">
+              <span className="inline-block size-2 rounded-full bg-[#62bcfa]" />
+              <span className="opacity-65">Live</span>
+            </div>
+            <span className="font-bold">1</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-6 flex-1">
+        <div className="flex justify-between place-items-center rounded-lg p-4 text-white bg-[#373F68] font-bold text-sm">
+          <div className="flex gap-8 ">
+            <div className="flex gap-4 place-items-center">
+              <Image
+                src={"/images/suggestions/icon-suggestions.svg"}
+                height={24}
+                width={23}
+                alt=""
+              />
+              <span className="text-lg">6 Suggestions</span>
+            </div>
+            <div className="flex place-items-center relative">
+              <button onClick={() => setSortbyOptions(!showSortbyOptions)}>
+                Sort by : {sortby}
+              </button>
+              {showSortbyOptions && (
+                <div className="absolute w-[255px] left-0 top-[70px] rounded-lg bg-white shadow-lg overflow-hidden  ">
+                  <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 ">
+                    <button
+                      className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setSortby("Most Upvotes"), setSortbyOptions(false);
+                      }}
+                    >
+                      <span>Most Upvotes</span>
+                      {sortby === "Most Upvotes" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setSortby("Least Upvotes"), setSortbyOptions(false);
+                      }}
+                    >
+                      <span>Least Upvotes</span>
+                      {sortby === "Least Upvotes" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setSortby("Most Comments"), setSortbyOptions(false);
+                      }}
+                    >
+                      <span>Most Comments</span>
+                      {sortby === "Most Comments" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setSortby("Least Comments"), setSortbyOptions(false);
+                      }}
+                    >
+                      <span>Least Comments</span>
+                      {sortby === "Least Comments" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <button className="px-6 py-4 bg-[#ad1fea] rounded-lg">
+              + Add Feedback
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-col gap-6">
+          {feedbacks.map((feedback) => (
+            <FeedbackCard key={feedback.id} {...feedback} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
