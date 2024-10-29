@@ -17,10 +17,10 @@ export default function Home() {
     "Bug",
     "Feature",
   ]);
-  const [feedbacks, setFeedbacks] = useState([
+  const [feedbacks, setFeedbacks] = useState<any[]>([
     {
       id: 1,
-      upvotes: 112,
+      upvotes: [54, 92, 315, 42, 454],
       header: "Add tags for solutions",
       detail: "Easier to search for solutions based on a specific stack.",
       category: "Enhancement",
@@ -28,7 +28,7 @@ export default function Home() {
     },
     {
       id: 2,
-      upvotes: 99,
+      upvotes: [99, 906],
       header: "Add a dark theme option",
       detail:
         "It would help people with light sensitivities and who prefer dark mode.",
@@ -37,13 +37,54 @@ export default function Home() {
     },
     {
       id: 3,
-      upvotes: 65,
+      upvotes: [53, 95, 35, 2, 4, 906],
       header: "Q&A within the challenge hubs",
       detail: "Challenge-specific Q&A would make for easy reference.",
       category: "Feature",
       comments: ["1"],
     },
   ]);
+
+  const [user, setUser] = useState<any>({
+    _id: 906,
+    username: "jonel briones",
+    upvoted: [3],
+  });
+
+  function upvote(suggestionID: number) {
+    const isAlreadyUpvoted = feedbacks.find(
+      (feedback) =>
+        feedback.id === suggestionID && feedback.upvotes.includes(user._id)
+    );
+    console.log(isAlreadyUpvoted);
+    const updateUpvote = feedbacks.map((feedback) =>
+      feedback.id === suggestionID
+        ? { ...feedback, upvotes: [...feedback.upvotes, user._id] }
+        : feedback
+    );
+    const updateRemoveUpvote = feedbacks.map((feedback) =>
+      feedback.id === suggestionID
+        ? {
+            ...feedback,
+            upvotes: feedback.upvotes.filter((id: any) => id !== user._id),
+          }
+        : feedback
+    );
+    console.log("updated:", updateUpvote);
+    if (!isAlreadyUpvoted) {
+      setFeedbacks(updateUpvote);
+      setUser({ ...user, upvoted: [...user.upvoted, suggestionID] });
+      console.log("adding upvote");
+    } else {
+      setFeedbacks(updateRemoveUpvote);
+      setUser({
+        ...user,
+        upvoted: user.upvoted.filter((id: number) => id !== suggestionID),
+      });
+      console.log("removing upvote");
+    }
+  }
+
   return (
     <div className="container flex gap-6 ">
       <div className="w-[255px] flex flex-col gap-6">
@@ -59,7 +100,7 @@ export default function Home() {
                 className={`px-3 py-2 rounded-lg font-semibold ${
                   toggleCategory === category
                     ? "bg-[#4661e6]"
-                    : "bg-[#f2f4ff] text-[#4661e6]"
+                    : "bg-[#f2f4ff] text-[#4661e6] hover:bg-[#cfd7ff]"
                 }`}
                 onClick={() => setToggleCategory(category)}
               >
@@ -194,7 +235,13 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-6">
           {feedbacks.map((feedback) => (
-            <FeedbackCard key={feedback.id} {...feedback} />
+            <FeedbackCard
+              key={feedback.id}
+              {...feedback}
+              // isLiked={user.upvoted.includes(feedback.id)}
+              userID={user._id}
+              upvote={upvote}
+            />
           ))}
         </div>
       </div>

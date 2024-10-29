@@ -21,3 +21,7 @@ body {
   background: #f2f4ff;
   font-family: Jost, sans-serif;
 }
+
+svg {
+  color: white;
+}
