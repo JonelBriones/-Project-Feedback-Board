@@ -1,6 +1,8 @@
 "use client";
 
 import FeedbackCard from "@/components/cards/FeedbackCard";
+import Suggestions from "@/components/Suggestions";
+import SuggestionsHeader from "@/components/SuggestionsHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -28,7 +30,7 @@ export default function Home() {
     },
     {
       id: 2,
-      upvotes: [99, 906],
+      upvotes: [99, 96, 4, 2, 422, 2222, 2, 4, 24],
       header: "Add a dark theme option",
       detail:
         "It would help people with light sensitivities and who prefer dark mode.",
@@ -37,18 +39,43 @@ export default function Home() {
     },
     {
       id: 3,
-      upvotes: [53, 95, 35, 2, 4, 906],
+      upvotes: [53, 95, 35, 2, 4, 4, 242, 24],
       header: "Q&A within the challenge hubs",
       detail: "Challenge-specific Q&A would make for easy reference.",
       category: "Feature",
       comments: ["1"],
+    },
+    {
+      id: 4,
+      upvotes: [53, 95, 35, 2, 4, 4],
+      header:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, laborum.",
+      detail: "Challenge-specific Q&A would make for easy reference.",
+      category: "Feature",
+      comments: ["14"],
+    },
+    {
+      id: 5,
+      upvotes: [53, 95, 35, 2, 4, 42, 242, 1, 31, 313, 1, 13, 1],
+      header: "Lorem consectetur adipisicing elit. Adipisci, laborum.",
+      detail: "Challenge-specific Q&A would make for easy reference.",
+      category: "Feature",
+      comments: ["12", "2424", "22"],
+    },
+    {
+      id: 6,
+      upvotes: [53, 95, 35, 2, 4, 4],
+      header: "Zit amet consectetur adipisicing elit. Adipisci, laborum.",
+      detail: "Challenge-specific Q&A would make for easy reference.",
+      category: "Feature",
+      comments: ["1", "52"],
     },
   ]);
 
   const [user, setUser] = useState<any>({
     _id: 906,
     username: "jonel briones",
-    upvoted: [3],
+    upvoted: [],
   });
 
   function upvote(suggestionID: number) {
@@ -83,6 +110,29 @@ export default function Home() {
       });
       console.log("removing upvote");
     }
+  }
+
+  switch (sortby) {
+    case "Most Upvotes":
+      feedbacks.sort(
+        (current, next) => next.upvotes.length - current.upvotes.length
+      );
+      break;
+    case "Least Upvotes":
+      feedbacks.sort(
+        (current, next) => current.upvotes.length - next.upvotes.length
+      );
+      break;
+    case "Most Comments":
+      feedbacks.sort(
+        (current, next) => next.comments.length - current.comments.length
+      );
+      break;
+    case "Least Comments":
+      feedbacks.sort(
+        (current, next) => current.comments.length - next.comments.length
+      );
+      break;
   }
 
   return (
@@ -140,110 +190,13 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col gap-6 flex-1">
-        <div className="flex justify-between place-items-center rounded-lg p-4 text-white bg-[#373F68] font-bold text-sm">
-          <div className="flex gap-8 ">
-            <div className="flex gap-4 place-items-center">
-              <Image
-                src={"/images/suggestions/icon-suggestions.svg"}
-                height={24}
-                width={23}
-                alt=""
-              />
-              <span className="text-lg">6 Suggestions</span>
-            </div>
-            <div className="flex place-items-center relative">
-              <button onClick={() => setSortbyOptions(!showSortbyOptions)}>
-                Sort by : {sortby}
-              </button>
-              {showSortbyOptions && (
-                <div className="absolute w-[255px] left-0 top-[70px] rounded-lg bg-white shadow-lg overflow-hidden  ">
-                  <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 ">
-                    <button
-                      className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                      onClick={() => {
-                        setSortby("Most Upvotes"), setSortbyOptions(false);
-                      }}
-                    >
-                      <span>Most Upvotes</span>
-                      {sortby === "Most Upvotes" && (
-                        <Image
-                          src={"/images/shared/icon-check.svg"}
-                          width={11.03}
-                          height={7.5}
-                          alt="icon-check"
-                        />
-                      )}
-                    </button>
-                    <button
-                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                      onClick={() => {
-                        setSortby("Least Upvotes"), setSortbyOptions(false);
-                      }}
-                    >
-                      <span>Least Upvotes</span>
-                      {sortby === "Least Upvotes" && (
-                        <Image
-                          src={"/images/shared/icon-check.svg"}
-                          width={11.03}
-                          height={7.5}
-                          alt="icon-check"
-                        />
-                      )}
-                    </button>
-                    <button
-                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                      onClick={() => {
-                        setSortby("Most Comments"), setSortbyOptions(false);
-                      }}
-                    >
-                      <span>Most Comments</span>
-                      {sortby === "Most Comments" && (
-                        <Image
-                          src={"/images/shared/icon-check.svg"}
-                          width={11.03}
-                          height={7.5}
-                          alt="icon-check"
-                        />
-                      )}
-                    </button>
-                    <button
-                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                      onClick={() => {
-                        setSortby("Least Comments"), setSortbyOptions(false);
-                      }}
-                    >
-                      <span>Least Comments</span>
-                      {sortby === "Least Comments" && (
-                        <Image
-                          src={"/images/shared/icon-check.svg"}
-                          width={11.03}
-                          height={7.5}
-                          alt="icon-check"
-                        />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          <div>
-            <button className="px-6 py-4 bg-[#ad1fea] rounded-lg">
-              + Add Feedback
-            </button>
-          </div>
-        </div>
-        <div className="flex flex-col gap-6">
-          {feedbacks.map((feedback) => (
-            <FeedbackCard
-              key={feedback.id}
-              {...feedback}
-              // isLiked={user.upvoted.includes(feedback.id)}
-              userID={user._id}
-              upvote={upvote}
-            />
-          ))}
-        </div>
+        <SuggestionsHeader
+          setSortbyOptions={setSortbyOptions}
+          showSortbyOptions={showSortbyOptions}
+          sortby={sortby}
+          setSortby={setSortby}
+        />
+        <Suggestions feedbacks={feedbacks} upvote={upvote} user={user} />
       </div>
     </div>
   );

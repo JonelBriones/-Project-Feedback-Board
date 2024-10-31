@@ -13,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex m-auto container mt-10">{children}</body>
+      <body className="flex justify-center m-auto container mt-10">
+        {children}
+      </body>
     </html>
   );
 }

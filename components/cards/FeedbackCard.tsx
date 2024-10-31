@@ -8,7 +8,6 @@ const FeedbackCard = ({
   comments,
   detail,
   category,
-  // isLiked,
   userID,
   upvote,
 }: any) => {
@@ -33,12 +32,6 @@ const FeedbackCard = ({
             fillRule="evenodd"
           />
         </svg>
-        {/* <Image
-          src={"/images/shared/icon-arrow-up.svg"}
-          width={8}
-          height={4}
-          alt="icon-arrow-up"
-        /> */}
         <span className="font-bold">{upvotes.length}</span>
       </button>
       <div className="flex basis-3/4 flex-col gap-2">
