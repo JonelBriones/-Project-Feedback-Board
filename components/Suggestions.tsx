@@ -2,19 +2,31 @@ import Image from "next/image";
 import React from "react";
 import FeedbackCard from "./cards/FeedbackCard";
 
-const Suggestions = ({ feedbacks, upvote, user }: any) => {
+const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
   return (
     <div className="h-[80vh] overflow-y-scroll">
       {feedbacks.length > 0 ? (
         <div className="flex flex-col gap-6 overflow-hidden">
-          {feedbacks.map((feedback: any) => (
-            <FeedbackCard
-              key={feedback.id}
-              {...feedback}
-              userID={user._id}
-              upvote={upvote}
-            />
-          ))}
+          {feedbacks.map((feedback: any) => {
+            if (category == "All")
+              return (
+                <FeedbackCard
+                  key={feedback.id}
+                  {...feedback}
+                  userID={user._id}
+                  upvote={upvote}
+                />
+              );
+            if (category.toLowerCase() == feedback.category)
+              return (
+                <FeedbackCard
+                  key={feedback.id}
+                  {...feedback}
+                  userID={user._id}
+                  upvote={upvote}
+                />
+              );
+          })}
         </div>
       ) : (
         <div className="bg-white shadow-lg drop-shadow-lg  rounded-lg">

@@ -1,0 +1,9 @@
+{
+  "currentUser": {
+    "_id": 906,
+    "image": "./assets/user-images/image-zena.jpg",
+    "name": "Zena Kelley",
+    "username": "velvetround",
+    "upvoted": [1, 10, 11]
+  }
+}

@@ -1,16 +1,16 @@
 "use client";
 
-import FeedbackCard from "@/components/cards/FeedbackCard";
 import Suggestions from "@/components/Suggestions";
 import SuggestionsHeader from "@/components/SuggestionsHeader";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { currentUser as userdata } from "@/data/user.json";
+import { productRequests as productdata } from "@/data/feedbacks.json";
 export default function Home() {
   const [toggleCategory, setToggleCategory] = useState("All");
-  const [sortby, setSortby] = useState("Most Upvotes");
-  const [showSortbyOptions, setSortbyOptions] = useState(false);
+  const [option, setSortby] = useState("Most Upvotes");
+  const [showOptions, setSortbyOptions] = useState(false);
+
   const [categories, setCategories] = useState([
     "All",
     "Ul",
@@ -19,64 +19,8 @@ export default function Home() {
     "Bug",
     "Feature",
   ]);
-  const [feedbacks, setFeedbacks] = useState<any[]>([
-    {
-      id: 1,
-      upvotes: [54, 92, 315, 42, 454],
-      header: "Add tags for solutions",
-      detail: "Easier to search for solutions based on a specific stack.",
-      category: "Enhancement",
-      comments: ["1", "2"],
-    },
-    {
-      id: 2,
-      upvotes: [99, 96, 4, 2, 422, 2222, 2, 4, 24],
-      header: "Add a dark theme option",
-      detail:
-        "It would help people with light sensitivities and who prefer dark mode.",
-      category: "Feature",
-      comments: ["1", "2", "3", "4"],
-    },
-    {
-      id: 3,
-      upvotes: [53, 95, 35, 2, 4, 4, 242, 24],
-      header: "Q&A within the challenge hubs",
-      detail: "Challenge-specific Q&A would make for easy reference.",
-      category: "Feature",
-      comments: ["1"],
-    },
-    {
-      id: 4,
-      upvotes: [53, 95, 35, 2, 4, 4],
-      header:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, laborum.",
-      detail: "Challenge-specific Q&A would make for easy reference.",
-      category: "Feature",
-      comments: ["14"],
-    },
-    {
-      id: 5,
-      upvotes: [53, 95, 35, 2, 4, 42, 242, 1, 31, 313, 1, 13, 1],
-      header: "Lorem consectetur adipisicing elit. Adipisci, laborum.",
-      detail: "Challenge-specific Q&A would make for easy reference.",
-      category: "Feature",
-      comments: ["12", "2424", "22"],
-    },
-    {
-      id: 6,
-      upvotes: [53, 95, 35, 2, 4, 4],
-      header: "Zit amet consectetur adipisicing elit. Adipisci, laborum.",
-      detail: "Challenge-specific Q&A would make for easy reference.",
-      category: "Feature",
-      comments: ["1", "52"],
-    },
-  ]);
-
-  const [user, setUser] = useState<any>({
-    _id: 906,
-    username: "jonel briones",
-    upvoted: [],
-  });
+  const [feedbacks, setFeedbacks] = useState<any[]>(productdata);
+  const [user, setUser] = useState<any>(userdata);
 
   function upvote(suggestionID: number) {
     const isAlreadyUpvoted = feedbacks.find(
@@ -112,7 +56,7 @@ export default function Home() {
     }
   }
 
-  switch (sortby) {
+  switch (option) {
     case "Most Upvotes":
       feedbacks.sort(
         (current, next) => next.upvotes.length - current.upvotes.length
@@ -124,14 +68,14 @@ export default function Home() {
       );
       break;
     case "Most Comments":
-      feedbacks.sort(
-        (current, next) => next.comments.length - current.comments.length
-      );
+      feedbacks.sort((current, next) => {
+        return next.comments.length - current.comments.length;
+      });
       break;
     case "Least Comments":
-      feedbacks.sort(
-        (current, next) => current.comments.length - next.comments.length
-      );
+      feedbacks.sort((current, next) => {
+        return current.comments.length - next.comments.length;
+      });
       break;
   }
 
@@ -191,12 +135,17 @@ export default function Home() {
       </div>
       <div className="flex flex-col gap-6 flex-1">
         <SuggestionsHeader
+          option={option}
+          setOption={setSortby}
+          showOptions={showOptions}
           setSortbyOptions={setSortbyOptions}
-          showSortbyOptions={showSortbyOptions}
-          sortby={sortby}
-          setSortby={setSortby}
         />
-        <Suggestions feedbacks={feedbacks} upvote={upvote} user={user} />
+        <Suggestions
+          category={toggleCategory}
+          feedbacks={feedbacks}
+          upvote={upvote}
+          user={user}
+        />
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ const CreateFeedback = ({ feedback }: any) => {
             </label>
             <button
               className={`flex place-items-center p-2 px-4 w-full text-left rounded-md ${
-                showCategoryOptions ? "border border-[#4661e6]" : ""
+                showCategoryOptions ? "border-2 border-[#4661e6]" : ""
               }`}
               onClick={() => setShowCategoryOptions(!showCategoryOptions)}
             >

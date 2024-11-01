@@ -3,10 +3,10 @@ import React from "react";
 
 const FeedbackCard = ({
   id,
-  header,
+  title,
   upvotes,
   comments,
-  detail,
+  description,
   category,
   userID,
   upvote,
@@ -35,8 +35,8 @@ const FeedbackCard = ({
         <span className="font-bold">{upvotes.length}</span>
       </button>
       <div className="flex basis-3/4 flex-col gap-2">
-        <h4 className="font-bold text-lg">{header}</h4>
-        <p className="text-[#647196]">{detail}</p>
+        <h4 className="font-bold text-lg">{title}</h4>
+        <p className="text-[#647196]">{description}</p>
         <span className="w-fit inline-block py-2 px-4 rounded-lg bg-[#F2F4FF] text-[#4661E6] font-semibold">
           {category}
         </span>
@@ -48,7 +48,7 @@ const FeedbackCard = ({
           height={16}
           alt="icon-comment"
         />
-        <span>{comments.length}</span>
+        <span>{comments.length ? comments.length : "0"}</span>
       </div>
     </div>
   );
