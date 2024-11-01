@@ -106,7 +106,10 @@ export default function Home() {
         <div className="flex flex-col gap-4 p-4 bg-white rounded-lg">
           <div className="flex justify-between">
             <h4 className="font-bold">Roadmap</h4>
-            <Link href={"/"} className="text-sm underline pb-2 text-[#4661e6]">
+            <Link
+              href={"/roadmap"}
+              className="text-sm underline pb-2 text-[#4661e6]"
+            >
               View
             </Link>
           </div>
@@ -139,6 +142,7 @@ export default function Home() {
           setOption={setSortby}
           showOptions={showOptions}
           setSortbyOptions={setSortbyOptions}
+          feedbacks={feedbacks}
         />
 
         <Suggestions

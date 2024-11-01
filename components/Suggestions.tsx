@@ -28,7 +28,7 @@ const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
   return (
     <div className="">
       {feedbacks.length > 0 ? (
-        <div className="flex flex-col gap-4 h-[80vh] overflow-auto">
+        <div className="flex flex-col gap-4 h-[80vh] ">
           {category == "All" &&
             feedbacks.map((feedback: any) => (
               <FeedbackCard
@@ -45,7 +45,9 @@ const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
           {category == "UI" && renderFeedback("ui")}
         </div>
       ) : (
-        <NoSuggestionsFound />
+        <div className="flex flex-col gap-4 h-[80vh]">
+          <NoSuggestionsFound />
+        </div>
       )}
     </div>
   );

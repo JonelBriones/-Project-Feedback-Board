@@ -8,6 +8,7 @@ const SuggestionsHeader = ({
   setOption,
   showOptions,
   setSortbyOptions,
+  feedbacks,
 }: any) => {
   return (
     <div className="flex justify-between place-items-center rounded-lg p-4 text-white bg-[#373F68] text-sm">
@@ -19,7 +20,9 @@ const SuggestionsHeader = ({
             width={23}
             alt="icon-suggestions"
           />
-          <span className="text-lg font-bold">6 Suggestions</span>
+          <span className="text-lg font-bold">
+            {feedbacks.length} Suggestions
+          </span>
         </div>
         <div className="flex place-items-center relative">
           <button

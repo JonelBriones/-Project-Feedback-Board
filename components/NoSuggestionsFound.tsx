@@ -3,7 +3,7 @@ import React from "react";
 
 const NoSuggestionsFound = () => {
   return (
-    <div className="bg-white shadow-lg drop-shadow-lg rounded-lg">
+    <div className="bg-white shadow-lg drop-shadow-lg rounded-lg ">
       <div className="flex flex-col place-items-center my-[100px] gap-10  ">
         <Image
           src={"/images/suggestions/illustration-empty.svg"}
