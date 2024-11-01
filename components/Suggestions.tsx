@@ -1,55 +1,51 @@
-import Image from "next/image";
 import React from "react";
 import FeedbackCard from "./cards/FeedbackCard";
+import NoSuggestionsFound from "./NoSuggestionsFound";
 
 const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
+  function renderFeedback(category: string) {
+    let noSuggestionsFound = feedbacks.filter(
+      (feedback: any) => feedback.category == category
+    );
+    console.log(noSuggestionsFound);
+    if (!noSuggestionsFound.length) {
+      return <NoSuggestionsFound />;
+    } else {
+      return feedbacks.map(
+        (feedback: any) =>
+          feedback.category == category && (
+            <FeedbackCard
+              key={feedback.id}
+              {...feedback}
+              userID={user._id}
+              upvote={upvote}
+            />
+          )
+      );
+    }
+  }
+
   return (
-    <div className="h-[80vh] overflow-y-scroll">
+    <div className="">
       {feedbacks.length > 0 ? (
-        <div className="flex flex-col gap-6 overflow-hidden">
-          {feedbacks.map((feedback: any) => {
-            if (category == "All")
-              return (
-                <FeedbackCard
-                  key={feedback.id}
-                  {...feedback}
-                  userID={user._id}
-                  upvote={upvote}
-                />
-              );
-            if (category.toLowerCase() == feedback.category)
-              return (
-                <FeedbackCard
-                  key={feedback.id}
-                  {...feedback}
-                  userID={user._id}
-                  upvote={upvote}
-                />
-              );
-          })}
+        <div className="flex flex-col gap-4 h-[80vh] overflow-auto">
+          {category == "All" &&
+            feedbacks.map((feedback: any) => (
+              <FeedbackCard
+                key={feedback.id}
+                {...feedback}
+                userID={user._id}
+                upvote={upvote}
+              />
+            ))}
+          {category == "Bug" && renderFeedback("bug")}
+          {category == "Feature" && renderFeedback("feature")}
+          {category == "Enhancement" && renderFeedback("enhancement")}
+          {category == "UX" && renderFeedback("ux")}
+          {category == "UI" && renderFeedback("ui")}
         </div>
       ) : (
-        <div className="bg-white shadow-lg drop-shadow-lg  rounded-lg">
-          <div className="flex flex-col place-items-center my-[100px] gap-10  ">
-            <Image
-              src={"/images/suggestions/illustration-empty.svg"}
-              width={129.64}
-              height={136.74}
-              sizes={"100vh"}
-              alt=""
-            />
-            <div className="flex flex-col place-items-center text-center gap-8">
-              <h2 className="font-bold text-xl">There is no feedback yet.</h2>
-              <p className="text-[#647196]">
-                Got a suggestion? Found a bug that needs to be squashed? <br />{" "}
-                We love hearing about new ideas to improve our app.
-              </p>
-              <button className="px-8 py-4 bg-[#ad1fea] text-white font-bold rounded-lg hover:bg-[#c75af6]">
-                + Add Feedback
-              </button>
-            </div>
-          </div>
-        </div>
+        <NoSuggestionsFound />
       )}
     </div>
   );

@@ -13,9 +13,9 @@ export default function Home() {
 
   const [categories, setCategories] = useState([
     "All",
-    "Ul",
+    "UI",
     "UX",
-    "Enchancement",
+    "Enhancement",
     "Bug",
     "Feature",
   ]);
@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <div className="container flex gap-6 ">
-      <div className="w-[255px] flex flex-col gap-6">
+      <div className="w-[255px] flex flex-col gap-4">
         <div className="h-[137px] flex flex-col justify-end bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
           <h4 className="font-bold">Frontend Mentor</h4>
           <p className="text-sm opacity-85">Feedback Board</p>
@@ -91,7 +91,7 @@ export default function Home() {
             {categories.map((category: any) => (
               <button
                 key={category}
-                className={`px-3 py-2 rounded-lg font-semibold ${
+                className={`px-4 py-2 rounded-xl font-semibold ${
                   toggleCategory === category
                     ? "bg-[#4661e6]"
                     : "bg-[#f2f4ff] text-[#4661e6] hover:bg-[#cfd7ff]"
@@ -133,13 +133,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-6 flex-1">
+      <div className="flex flex-col gap-4 flex-1">
         <SuggestionsHeader
           option={option}
           setOption={setSortby}
           showOptions={showOptions}
           setSortbyOptions={setSortbyOptions}
         />
+
         <Suggestions
           category={toggleCategory}
           feedbacks={feedbacks}

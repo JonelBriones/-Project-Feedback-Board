@@ -16,7 +16,7 @@ const FeedbackCard = ({
   return (
     <div className="flex justify-evenly bg-white rounded-lg p-4 py-8">
       <button
-        className={`flex flex-col gap-2 place-items-center justify-center rounded-lg w-[40px] h-[53px] bg-[#f2f4fe] ${
+        className={`flex flex-col gap-2 place-items-center justify-center rounded-xl w-[40px] h-fit bg-[#f2f4fe] p-3 text-sm ${
           upvotes.includes(userID)
             ? "bg-[rgb(70,97,230)] text-white"
             : "text-[#3A4374] hover:bg-[#cfd7ff]"
