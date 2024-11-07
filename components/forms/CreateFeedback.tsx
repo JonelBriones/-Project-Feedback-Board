@@ -1,30 +1,17 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import GoBack from "../Buttons/GoBack";
+import { addFeedback } from "@/app/_actions/addFeedback";
 
-const CreateFeedback = ({ feedback }: any) => {
+const CreateFeedback = () => {
   const [category, setCategory] = useState("Feature");
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
-  const onSubmitHandler = (e: any) => {
-    e.preventDefault();
-  };
 
-  const [feedbackInput, setFeedbackInput] = useState({
-    title: "",
-    category: "",
-    details: "",
-  });
-  const onChangeHandler = (fields: any) => {
-    setFeedbackInput((prev) => {
-      return { ...prev, ...fields };
-    });
-  };
   return (
-    <div className="w-[456px]">
+    <div className="max-w-[540px] w-[100vw]">
       <GoBack />
-      <div className="flex flex-col gap-8 relative rounded-lg bg-white p-8">
+      <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image
           src={"/images/shared/icon-new-feedback.svg"}
           width={56}
@@ -33,10 +20,7 @@ const CreateFeedback = ({ feedback }: any) => {
           className="absolute top-[-30px] left-[40px]"
         />
         <h1 className="font-bold text-xl">Create New Feedback</h1>
-        <form
-          className="flex flex-col gap-4 text-sm"
-          onSubmit={onSubmitHandler}
-        >
+        <form className="flex flex-col gap-4 text-sm" action={addFeedback}>
           <div className="flex flex-col gap-2">
             <h4 className="font-bold">Feedback Title</h4>
             <label className="text-[#647196]" htmlFor={"description"}>
@@ -163,8 +147,6 @@ const CreateFeedback = ({ feedback }: any) => {
               name="details"
               id="details"
               className="w-full rounded-md bg-[#f7f8fd] p-2"
-              value={feedbackInput.details}
-              onChange={(e) => onChangeHandler(e.target.value)}
             />
           </div>
         </form>

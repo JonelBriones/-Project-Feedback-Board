@@ -49,74 +49,78 @@ const page = () => {
     );
     console.log(statusLength);
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4  h-[80vh]  ">
         <div>
           <h4 className="font-bold text-lg">
             {status} ({statusLength.length})
           </h4>
           <p className="text-[#647196]">{description}</p>
         </div>
-        {feedbacks.map(
-          (feedback: any) =>
-            feedback.status.toLowerCase() == status.toLowerCase() && (
-              <div
-                key={feedback.id}
-                className={`flex flex-col bg-white p-6 gap-2 rounded-lg border-t-[4px] border-t-[#${color}]`}
-              >
-                <span className="flex gap-4 place-items-center">
-                  <div className={`size-2 bg-[#${color}] rounded-full`} />
-                  Planned
-                </span>
-                <h1 className="font-bold text-lg">{feedback.title}</h1>
-                <p className="text-[#647196]">{feedback.description}</p>
-                <button className="w-fit px-4 py-2 rounded-xl font-semibold bg-[#f2f4ff] text-[#4661e6]">
-                  {feedback.category}
-                </button>
-                <div className="flex justify-between">
-                  <button
-                    className={`flex gap-3 place-items-center justify-center rounded-xl bg-[#f2f4fe] px-3 py-2 text-sm ${
-                      feedback.upvotes.includes(user._id)
-                        ? "bg-[rgb(70,97,230)] text-white"
-                        : "text-[#3A4374] hover:bg-[#cfd7ff]"
-                    }`}
-                    onClick={() => upvote(feedback.id)}
-                  >
-                    <svg
-                      width="10"
-                      height="7"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1 6l4-4 4 4"
-                        stroke={
-                          feedback.upvotes.includes(user._id)
-                            ? "#fff"
-                            : "#4661e6"
-                        }
-                        strokeWidth="2"
-                        fill="none"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                    <span className="font-bold">{feedback.upvotes.length}</span>
+        <div className=" flex flex-col gap-4 overflow-auto">
+          {feedbacks.map(
+            (feedback: any) =>
+              feedback.status.toLowerCase() == status.toLowerCase() && (
+                <div
+                  key={feedback.id}
+                  className={`flex flex-col bg-white p-6 gap-2 rounded-lg border-t-[4px] border-t-[#${color}] `}
+                >
+                  <span className="flex gap-4 place-items-center">
+                    <div className={`size-2 bg-[#${color}] rounded-full`} />
+                    Planned
+                  </span>
+                  <h1 className="font-bold text-lg">{feedback.title}</h1>
+                  <p className="text-[#647196]">{feedback.description}</p>
+                  <button className="w-fit px-4 py-2 rounded-xl font-semibold bg-[#f2f4ff] text-[#4661e6]">
+                    {feedback.category}
                   </button>
-                  <div className="flex gap-4 place-items-center">
-                    <Image
-                      src={"/images/shared/icon-comments.svg"}
-                      width={18}
-                      height={16}
-                      alt="icon-comment"
-                    />
-                    <span>
-                      {feedback.comments.length
-                        ? feedback.comments.length
-                        : "0"}
-                    </span>
+                  <div className="flex justify-between">
+                    <button
+                      className={`flex gap-3 place-items-center justify-center rounded-xl bg-[#f2f4fe] px-3 py-2 text-sm ${
+                        feedback.upvotes.includes(user._id)
+                          ? "bg-[rgb(70,97,230)] text-white"
+                          : "text-[#3A4374] hover:bg-[#cfd7ff]"
+                      }`}
+                      onClick={() => upvote(feedback.id)}
+                    >
+                      <svg
+                        width="10"
+                        height="7"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 6l4-4 4 4"
+                          stroke={
+                            feedback.upvotes.includes(user._id)
+                              ? "#fff"
+                              : "#4661e6"
+                          }
+                          strokeWidth="2"
+                          fill="none"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                      <span className="font-bold">
+                        {feedback.upvotes.length}
+                      </span>
+                    </button>
+                    <div className="flex gap-4 place-items-center">
+                      <Image
+                        src={"/images/shared/icon-comments.svg"}
+                        width={18}
+                        height={16}
+                        alt="icon-comment"
+                      />
+                      <span>
+                        {feedback.comments.length
+                          ? feedback.comments.length
+                          : "0"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-        )}
+              )
+          )}
+        </div>
       </div>
     );
   }

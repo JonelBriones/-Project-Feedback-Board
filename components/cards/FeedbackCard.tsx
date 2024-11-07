@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const FeedbackCard = ({
@@ -14,7 +15,10 @@ const FeedbackCard = ({
   // IF USER UPVOTES SUGGESTION, ADD ID TO LIST OF UPVOTES BY USER
 
   return (
-    <div className="flex justify-evenly bg-white rounded-lg p-4 py-8">
+    <Link
+      href={`/${id}`}
+      className="flex justify-evenly bg-white rounded-lg p-4 py-8 hover:text-[#4661E6]"
+    >
       <button
         className={`flex flex-col gap-2 place-items-center justify-center rounded-xl w-[40px] h-fit bg-[#f2f4fe] p-3 text-sm ${
           upvotes.includes(userID)
@@ -50,7 +54,7 @@ const FeedbackCard = ({
         />
         <span>{comments.length ? comments.length : "0"}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 

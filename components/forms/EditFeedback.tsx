@@ -3,8 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import GoBack from "../Buttons/GoBack";
-
+import { useParams } from "next/navigation";
+import { currentUser as user } from "@/data/user.json";
+import { productRequests as productdata } from "@/data/feedbacks.json";
+import { useFormState } from "react-dom";
 const EditFeedback = () => {
+  const { id } = useParams();
+  const [feedback, setFeedback] = useState<any>(
+    productdata.find((feedback: any) => feedback.id == id)
+  );
   const [category, setCategory] = useState("Feature");
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
   const [status, setStatus] = useState("Suggestion");
@@ -13,10 +20,11 @@ const EditFeedback = () => {
   const onSubmitHandler = (e: any) => {
     e.preventDefault();
   };
+
   return (
-    <div className="w-[456px]">
+    <div className="max-w-[540px] w-[100vw]">
       <GoBack />
-      <div className="flex flex-col gap-8 relative rounded-lg bg-white p-8">
+      <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image
           src={"/images/shared/icon-new-feedback.svg"}
           width={56}
@@ -24,11 +32,8 @@ const EditFeedback = () => {
           alt="icon-new-feedback"
           className="absolute top-[-30px] left-[40px]"
         />
-        <h1 className="font-bold text-xl">Create New Feedback</h1>
-        <form
-          className="flex flex-col gap-4 text-sm"
-          onSubmit={onSubmitHandler}
-        >
+        <h1 className="font-bold text-xl">Editing '{feedback.title}'</h1>
+        <form className="flex flex-col gap-4 text-sm" action={onSubmitHandler}>
           <div className="flex flex-col gap-2">
             <h4 className="font-bold">Feedback Title</h4>
             <label className="text-[#647196]" htmlFor={"description"}>
@@ -38,6 +43,8 @@ const EditFeedback = () => {
               name="description"
               id="description"
               className="w-full rounded-md bg-[#f7f8fd] p-2"
+              value={feedback.description}
+              // onChange={(e)=>onChangeHandler(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -243,13 +250,11 @@ const EditFeedback = () => {
             )}
           </div>
         </form>
-        <div className="flex justify-between font-bold text-[#f2fefe]">
-          <button className="bg-[#e98888] rounded-lg p-3 px-6">Delete</button>
+        <div className="flex justify-between font-bold text-[#f2fefe] text-sm">
+          <button className="bg-[#e98888] rounded-xl p-3 px-5 ">Delete</button>
           <div className="flex gap-4">
-            <button className="bg-[#3a4374] rounded-lg p-3 px-6">
-              Cancelhh
-            </button>
-            <button className="bg-[#ad1fea] rounded-lg p-3 px-6">
+            <button className="bg-[#3a4374] rounded-xl p-3 px-6">Cancel</button>
+            <button className="bg-[#ad1fea] rounded-xl p-3 px-6">
               Save Changes
             </button>
           </div>

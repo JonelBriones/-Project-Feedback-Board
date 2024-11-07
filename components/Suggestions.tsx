@@ -15,7 +15,7 @@ const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
         (feedback: any) =>
           feedback.category == category && (
             <FeedbackCard
-              key={feedback.id}
+              key={feedback._id}
               {...feedback}
               userID={user._id}
               upvote={upvote}
@@ -28,11 +28,11 @@ const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
   return (
     <div className="">
       {feedbacks.length > 0 ? (
-        <div className="flex flex-col gap-4 h-[80vh] ">
+        <div className="flex flex-col gap-4 h-[80vh] overflow-y-scroll ">
           {category == "All" &&
             feedbacks.map((feedback: any) => (
               <FeedbackCard
-                key={feedback.id}
+                key={feedback._id}
                 {...feedback}
                 userID={user._id}
                 upvote={upvote}

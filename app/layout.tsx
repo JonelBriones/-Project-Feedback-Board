@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { createContext } from "react";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Project Feedback",
@@ -13,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex justify-center m-auto container mt-10">
-        {children}
-      </body>
+      <ThemeProvider>
+        <body className="flex justify-center m-auto container mt-10">
+          {children}
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

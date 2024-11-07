@@ -4,10 +4,10 @@ import React from "react";
 
 const GoBack = () => {
   return (
-    <div className="mb-16">
+    <div className="">
       <Link
         href={"/"}
-        className="flex gap-2 place-items-center font-bold text-[#647196]"
+        className="flex gap-2 place-items-center font-bold text-[#647196] hover:underline"
       >
         <Image
           src="/images/shared/icon-arrow-left.svg"
