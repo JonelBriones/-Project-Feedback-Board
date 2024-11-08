@@ -1,18 +1,16 @@
 "use client";
-import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import { currentUser as user } from "@/data/user.json";
-import { productRequests as productdata } from "@/data/feedbacks.json";
-import FeedbackCard from "@/components/cards/FeedbackCard";
-import GoBack from "@/components/Buttons/GoBack";
-import Image from "next/image";
+import FeedbackCard from "./cards/FeedbackCard";
+import GoBack from "./Buttons/GoBack";
 import Link from "next/link";
-const page = () => {
-  const { id } = useParams();
-  const [feedback, setFeedback] = useState<any>(
-    productdata.find((feedback: any) => feedback.id == id)
-  );
+import Image from "next/image";
 
+const SuggestionCard = (suggestion: any) => {
+  const [feedback, setFeedback] = useState<any>(suggestion.feedback);
+  let user = {
+    _id: 2332,
+    upvotes: [],
+  };
   function upvote() {
     const isUpvoted = feedback?.upvotes.includes(user._id);
 
@@ -31,7 +29,7 @@ const page = () => {
       <div className="flex justify-between place-items-center">
         <GoBack />
         <Link
-          href={`/edit-feedback/${id}`}
+          href={`/edit-feedback/${feedback._id}`}
           className="rounded-xl font-bold bg-[#7c91f9] text-white p-3 px-6"
         >
           Edit Feedback
@@ -40,7 +38,7 @@ const page = () => {
 
       {feedback && (
         <FeedbackCard
-          key={feedback.id}
+          key={feedback._id}
           {...feedback}
           userID={user._id}
           upvote={upvote}
@@ -49,7 +47,7 @@ const page = () => {
 
       <div className="bg-white p-8 rounded-xl">
         <div className="flex flex-col gap-4">
-          <h1 className="font-bold">{feedback.comments.length} Comments</h1>
+          <h1 className="font-bold">{feedback.comments?.length} Comments</h1>
           <div className="flex gap-4">
             <Image
               src={"/images/user-images/image-elijah.jpg"}
@@ -134,4 +132,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SuggestionCard;

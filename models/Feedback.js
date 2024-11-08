@@ -26,13 +26,18 @@ const FeedbackSchema = new Schema(
     ],
     comments: [
       {
-        owner: {
+        user: {
           type: Schema.Types.ObjectId,
           ref: "Feedback",
           required: true,
         },
         content: {
           type: String,
+          required: true,
+        },
+        replyinigTo: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
           required: true,
         },
       },

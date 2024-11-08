@@ -1,10 +1,16 @@
+"use server";
 import EditFeedback from "@/components/forms/EditFeedback";
+import connectDB from "@/config/database";
+import Feedback from "@/models/Feedback";
 import React from "react";
 
-const page = () => {
+const page = async ({ params }: any) => {
+  const { id } = await params;
+  await connectDB();
+  const feedback = await Feedback.findById(id).lean();
   return (
     <div>
-      <EditFeedback />
+      <EditFeedback feedback={JSON.parse(JSON.stringify(feedback))} />
     </div>
   );
 };

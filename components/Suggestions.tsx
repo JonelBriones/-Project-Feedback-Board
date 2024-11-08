@@ -1,13 +1,13 @@
 import React from "react";
 import FeedbackCard from "./cards/FeedbackCard";
 import NoSuggestionsFound from "./NoSuggestionsFound";
+import Link from "next/link";
 
 const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
   function renderFeedback(category: string) {
     let noSuggestionsFound = feedbacks.filter(
       (feedback: any) => feedback.category == category
     );
-    console.log(noSuggestionsFound);
     if (!noSuggestionsFound.length) {
       return <NoSuggestionsFound />;
     } else {
@@ -26,16 +26,16 @@ const Suggestions = ({ category, feedbacks, upvote, user }: any) => {
   }
 
   return (
-    <div className="">
+    <div>
       {feedbacks.length > 0 ? (
         <div className="flex flex-col gap-4 h-[80vh] overflow-y-scroll ">
           {category == "All" &&
             feedbacks.map((feedback: any) => (
               <FeedbackCard
-                key={feedback._id}
                 {...feedback}
                 userID={user._id}
                 upvote={upvote}
+                key={feedback._id}
               />
             ))}
           {category == "Bug" && renderFeedback("bug")}

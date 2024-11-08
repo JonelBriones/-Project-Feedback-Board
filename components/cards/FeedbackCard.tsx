@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 const FeedbackCard = ({
-  id,
+  _id,
   title,
   upvotes,
   comments,
@@ -11,21 +11,20 @@ const FeedbackCard = ({
   category,
   userID,
   upvote,
+  hover,
 }: any) => {
-  // IF USER UPVOTES SUGGESTION, ADD ID TO LIST OF UPVOTES BY USER
-
   return (
     <Link
-      href={`/${id}`}
+      href={`/suggestion/${_id}`}
       className="flex justify-evenly bg-white rounded-lg p-4 py-8 hover:text-[#4661E6]"
     >
       <button
-        className={`flex flex-col gap-2 place-items-center justify-center rounded-xl w-[40px] h-fit bg-[#f2f4fe] p-3 text-sm ${
+        className={`flex flex-col gap-2 place-items-center justify-center rounded-xl w-[40px] h-fit bg-[#f2f4fe] p-3 text-sm z-10 ${
           upvotes.includes(userID)
             ? "bg-[rgb(70,97,230)] text-white"
             : "text-[#3A4374] hover:bg-[#cfd7ff]"
         }`}
-        onClick={() => upvote(id)}
+        onClick={() => upvote(_id)}
       >
         <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
           <path
