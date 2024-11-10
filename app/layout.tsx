@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { createContext } from "react";
+import AuthProvider from "@/components/AuthProvider";
 import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
@@ -14,12 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ThemeProvider>
-        <body className="flex justify-center m-auto container mt-10">
-          {children}
-        </body>
-      </ThemeProvider>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <ThemeProvider>
+          <body className="flex justify-center m-auto container mt-10">
+            {children}
+          </body>
+        </ThemeProvider>
+      </html>
+    </AuthProvider>
   );
 }

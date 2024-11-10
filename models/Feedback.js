@@ -20,25 +20,18 @@ const FeedbackSchema = new Schema(
     },
     upvotes: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
       },
     ],
     comments: [
       {
-        user: {
-          type: Schema.Types.ObjectId,
-          ref: "Feedback",
-          required: true,
-        },
+        type: Schema.Types.ObjectId,
         content: {
           type: String,
-          required: true,
         },
-        replyinigTo: {
+        replyingTo: {
           type: Schema.Types.ObjectId,
           ref: "User",
-          required: true,
         },
       },
     ],

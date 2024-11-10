@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Suggestions from "@/components/Suggestions";
 import SuggestionsHeader from "@/components/SuggestionsHeader";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
@@ -18,41 +19,8 @@ const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
     "Feature",
   ]);
   const [feedbacks, setFeedbacks] = useState<any[]>(feedbacksAPI);
-  const [user, setUser] = useState<any>(currentUserAPI);
-
-  function upvote(suggestionID: number) {
-    const isAlreadyUpvoted = feedbacks.find(
-      (feedback) =>
-        feedback.id === suggestionID && feedback.upvotes.includes(user._id)
-    );
-    console.log(isAlreadyUpvoted);
-    const updateUpvote = feedbacks.map((feedback) =>
-      feedback.id === suggestionID
-        ? { ...feedback, upvotes: [...feedback.upvotes, user._id] }
-        : feedback
-    );
-    const updateRemoveUpvote = feedbacks.map((feedback) =>
-      feedback.id === suggestionID
-        ? {
-            ...feedback,
-            upvotes: feedback.upvotes.filter((id: any) => id !== user._id),
-          }
-        : feedback
-    );
-    console.log("updated:", updateUpvote);
-    if (!isAlreadyUpvoted) {
-      setFeedbacks(updateUpvote);
-      setUser({ ...user, upvoted: [...user.upvoted, suggestionID] });
-      console.log("adding upvote");
-    } else {
-      setFeedbacks(updateRemoveUpvote);
-      setUser({
-        ...user,
-        upvoted: user.upvoted.filter((id: number) => id !== suggestionID),
-      });
-      console.log("removing upvote");
-    }
-  }
+  const { data: session } = useSession();
+  const [user, setUser] = useState<any>(session?.user || currentUserAPI[0]);
 
   switch (option) {
     case "Most Upvotes":
@@ -134,7 +102,7 @@ const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-4 flex-1">
+      <div className="flex flex-col gap-4 flex-1 w-[100vh]">
         <SuggestionsHeader
           option={option}
           setOption={setSortby}
@@ -146,8 +114,7 @@ const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
         <Suggestions
           category={toggleCategory}
           feedbacks={feedbacks}
-          upvote={upvote}
-          user={user}
+          // user={user}
         />
       </div>
     </div>
