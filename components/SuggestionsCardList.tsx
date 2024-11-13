@@ -2,13 +2,7 @@ import React from "react";
 import FeedbackCard from "./cards/FeedbackCard";
 import NoSuggestionsFound from "./NoSuggestionsFound";
 
-const Suggestions = ({
-  category,
-  feedbacks,
-  upvote,
-  user,
-  setFeedbacks,
-}: any) => {
+const Suggestions = ({ category, feedbacks }: any) => {
   function renderFeedback(category: string) {
     let noSuggestionsFound = feedbacks.filter(
       (feedback: any) => feedback.category == category
@@ -19,31 +13,19 @@ const Suggestions = ({
       return feedbacks.map(
         (feedback: any) =>
           feedback.category == category && (
-            <FeedbackCard
-              key={feedback._id}
-              {...feedback}
-              // userID={user._id}
-              upvote={upvote}
-              setFeedbacks={setFeedbacks}
-            />
+            <FeedbackCard key={feedback._id} {...feedback} />
           )
       );
     }
   }
 
   return (
-    <div className="">
+    <div>
       {feedbacks.length > 0 ? (
         <div className="flex flex-col gap-4 h-[80vh] overflow-y-auto ">
           {category == "All" &&
             feedbacks.map((feedback: any) => (
-              <FeedbackCard
-                {...feedback}
-                // userID={user._id}
-                upvote={upvote}
-                key={feedback._id}
-                setFeedbacks={setFeedbacks}
-              />
+              <FeedbackCard {...feedback} key={feedback._id} />
             ))}
           {category == "Bug" && renderFeedback("bug")}
           {category == "Feature" && renderFeedback("feature")}

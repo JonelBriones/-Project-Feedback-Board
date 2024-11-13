@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, SchemaType, model, models } from "mongoose";
 
 const FeedbackSchema = new Schema(
   {
@@ -25,14 +25,38 @@ const FeedbackSchema = new Schema(
     ],
     comments: [
       {
-        type: Schema.Types.ObjectId,
+        owner: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
         content: {
           type: String,
         },
         replyingTo: {
           type: Schema.Types.ObjectId,
           ref: "User",
+          require: true,
         },
+
+        // replies: [
+        //   {
+        //     reply: {
+        //       owner: {
+        //         type: Schema.Types.ObjectId,
+        //         ref: "User",
+        //         require: true,
+        //       },
+        //       content: {
+        //         type: String,
+        //       },
+        //       replyingTo: {
+        //         type: Schema.Types.ObjectId,
+        //         require: true,
+        //         ref: "User",
+        //       },
+        //     },
+        //   },
+        // ],
       },
     ],
   },

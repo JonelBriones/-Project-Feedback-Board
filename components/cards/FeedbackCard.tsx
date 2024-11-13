@@ -1,10 +1,8 @@
-"use client";
-import upvoteAction from "@/app/_actions/users/upvoteAction";
 import { useSession } from "next-auth/react";
-
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import upvoteAction from "@/app/_actions/users/upvoteAction";
 
 const FeedbackCard = ({
   _id,
@@ -13,17 +11,16 @@ const FeedbackCard = ({
   comments,
   description,
   category,
-}: // userID,
-any) => {
+}: any) => {
   const { data: session } = useSession();
-  let userID = session?.user?.id;
-
   let isLiked = upvotes.includes(session?.user?.id);
-  const upvoteHandler = async () => {
-    if (!userID) console.log("redirected to sign in page");
+  const upvoteOnClick = () => {
+    if (!session) {
+      console.log("user needs to sign in");
+      return;
+    }
     upvoteAction(_id);
   };
-
   return (
     <div className="flex gap-8 bg-white rounded-lg p-8">
       <button
@@ -32,7 +29,7 @@ any) => {
             ? "bg-[rgb(70,97,230)] text-white"
             : "text-[#3A4374] hover:bg-[#cfd7ff]"
         }`}
-        onClick={upvoteHandler}
+        onClick={upvoteOnClick}
       >
         <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
           <path

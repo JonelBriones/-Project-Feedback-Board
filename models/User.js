@@ -14,10 +14,18 @@ const UserSchema = new Schema(
     image: {
       type: String,
     },
-    suggestions: {
-      type: Schema.Types.ObjectId,
-      ref: "Feedback",
-    },
+    suggestions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Feedback",
+      },
+    ],
+    upvotes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Feedback",
+      },
+    ],
   },
   { timestamps: true }
 );

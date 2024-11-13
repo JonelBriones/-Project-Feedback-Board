@@ -1,4 +1,4 @@
-import Suggestions from "@/components/Suggestions";
+import Suggestions from "@/components/SuggestionsCardList";
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import React from "react";

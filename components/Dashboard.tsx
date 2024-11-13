@@ -1,40 +1,34 @@
 "use client";
-import React, { useState } from "react";
-import Suggestions from "@/components/Suggestions";
+import React, { useEffect, useState } from "react";
+import Suggestions from "@/components/SuggestionsCardList";
 import SuggestionsHeader from "@/components/SuggestionsHeader";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
-const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
+const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
   const [option, setSortby] = useState("Most Upvotes");
   const [showOptions, setSortbyOptions] = useState(false);
 
-  const [categories, setCategories] = useState([
-    "All",
-    "UI",
-    "UX",
-    "Enhancement",
-    "Bug",
-    "Feature",
-  ]);
-  const [feedbacks, setFeedbacks] = useState<any[]>(feedbacksAPI);
-  const { data: session } = useSession();
-  const [user, setUser] = useState<any>(session?.user || currentUserAPI[0]);
+  const categories = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
+  const feedbacks = feedbacksAPI;
+
+  useEffect(() => {
+    console.log(feedbacks);
+  }, [feedbacks]);
 
   switch (option) {
     case "Most Upvotes":
       feedbacks.sort(
-        (current, next) => next.upvotes.length - current.upvotes.length
+        (current: [], next: []) => next.upvotes.length - current.upvotes.length
       );
       break;
     case "Least Upvotes":
       feedbacks.sort(
-        (current, next) => current.upvotes.length - next.upvotes.length
+        (current: [], next: []) => current.upvotes.length - next.upvotes.length
       );
       break;
     case "Most Comments":
-      feedbacks.sort((current, next) => {
+      feedbacks.sort((current: [], next: []) => {
         return next.comments.length - current.comments.length;
       });
       break;
@@ -44,7 +38,6 @@ const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
       });
       break;
   }
-
   return (
     <div className="container flex gap-6">
       <div className="w-[255px] flex flex-col gap-4">
@@ -111,11 +104,7 @@ const Dashboard = ({ feedbacksAPI, currentUserAPI }: any) => {
           feedbacks={feedbacks}
         />
 
-        <Suggestions
-          category={toggleCategory}
-          feedbacks={feedbacks}
-          // user={user}
-        />
+        <Suggestions category={toggleCategory} feedbacks={feedbacks} />
       </div>
     </div>
   );

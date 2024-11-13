@@ -38,7 +38,7 @@ export const authOptions = {
       const user = await User.findOne({ email: session.user.email });
 
       session.user.id = user._id.toString();
-
+      console.log("SESSION", session);
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
