@@ -1,14 +1,14 @@
 import React from "react";
-import FeedbackCard from "./cards/FeedbackCard";
-import NoSuggestionsFound from "./NoSuggestionsFound";
+import NoFeedbacksFound from "./NoFeedbacksFound";
+import FeedbackCard from "./FeedbackCard";
 
-const Suggestions = ({ category, feedbacks }: any) => {
+const FeedbacksCardList = ({ category, feedbacks }: any) => {
   function renderFeedback(category: string) {
     let noSuggestionsFound = feedbacks.filter(
       (feedback: any) => feedback.category == category
     );
     if (!noSuggestionsFound.length) {
-      return <NoSuggestionsFound />;
+      return <NoFeedbacksFound />;
     } else {
       return feedbacks.map(
         (feedback: any) =>
@@ -35,11 +35,11 @@ const Suggestions = ({ category, feedbacks }: any) => {
         </div>
       ) : (
         <div className="flex flex-col gap-4 h-[80vh]">
-          <NoSuggestionsFound />
+          <NoFeedbacksFound />
         </div>
       )}
     </div>
   );
 };
 
-export default Suggestions;
+export default FeedbacksCardList;

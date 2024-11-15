@@ -13,10 +13,7 @@ const EditFeedback = ({ feedback }: any) => {
   const [showStatusOptions, setShowStatusOptions] = useState(false);
 
   const updateSuggestionById = editSuggestion.bind(null, feedback._id);
-  // const onDeleteSuggestionHandler = (e) => {
-  //   e.preventDefault();
-  //   deleteSuggestion(feedback._id);
-  // };
+
   return (
     <div className="max-w-[540px] w-[100vw]">
       <GoBack />

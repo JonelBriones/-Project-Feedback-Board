@@ -1,8 +1,11 @@
+"use client";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import upvoteAction from "@/app/_actions/users/upvoteAction";
+import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
+import LoadingPage from "@/app/loading";
 
 const FeedbackCard = ({
   _id,
@@ -13,14 +16,34 @@ const FeedbackCard = ({
   category,
 }: any) => {
   const { data: session } = useSession();
-  let isLiked = upvotes.includes(session?.user?.id);
-  const upvoteOnClick = () => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [upvoteLength, setUpvotedLength] = useState(upvotes?.length);
+  const upvoteOnClick = async () => {
+    setLoading(true);
     if (!session) {
       console.log("user needs to sign in");
       return;
     }
-    upvoteAction(_id);
+    upvoteAction(_id).then((res) => {
+      if (res.error) return console.log(res.error);
+      setIsLiked(res.isLiked);
+      setUpvotedLength(res.upvoteCount);
+      setLoading(false);
+    });
   };
+  useEffect(() => {
+    setIsLiked(upvotes?.includes(session?.user?.id));
+    if (!session?.user?.id) {
+      setLoading(false);
+      return;
+    }
+    getUpvoteStatusAction(_id).then((res) => {
+      if (res.error) return console.log(res.error);
+      if (res.isLiked) setIsLiked(res.isLiked);
+      setLoading(false);
+    });
+  }, [session?.user?.id]);
   return (
     <div className="flex gap-8 bg-white rounded-lg p-8">
       <button
@@ -31,16 +54,26 @@ const FeedbackCard = ({
         }`}
         onClick={upvoteOnClick}
       >
-        <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M1 6l4-4 4 4"
-            stroke={isLiked ? "#fff" : "#4661e6"}
-            strokeWidth="2"
-            fill="none"
-            fillRule="evenodd"
+        {loading ? (
+          <LoadingPage
+            loading={loading}
+            color={isLiked ? "fff" : "#ad1fea"}
+            size={20}
           />
-        </svg>
-        <span className="font-bold">{upvotes.length}</span>
+        ) : (
+          <>
+            <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M1 6l4-4 4 4"
+                stroke={isLiked ? "#fff" : "#4661e6"}
+                strokeWidth="2"
+                fill="none"
+                fillRule="evenodd"
+              />
+            </svg>
+            <span className="font-bold">{upvoteLength}</span>
+          </>
+        )}
       </button>
 
       <Link href={`/suggestion/${_id}`} className="flex justify-between w-full">

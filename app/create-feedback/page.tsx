@@ -1,4 +1,4 @@
-import CreateFeedback from "@/components/forms/CreateFeedback";
+import CreateFeedback from "@/components/Forms/CreateFeedback";
 import React from "react";
 
 const page = () => {

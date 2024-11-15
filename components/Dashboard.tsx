@@ -1,8 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Suggestions from "@/components/SuggestionsCardList";
-import SuggestionsHeader from "@/components/SuggestionsHeader";
+import React, { useState } from "react";
+
 import Link from "next/link";
+import { Feedback } from "@/types";
+import FeedbacksHeader from "./Feedback/FeedbacksHeader";
+import FeedbacksCardList from "./Feedback/FeedbacksCardList";
 
 const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
@@ -12,28 +14,26 @@ const Dashboard = ({ feedbacksAPI }: any) => {
   const categories = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
   const feedbacks = feedbacksAPI;
 
-  useEffect(() => {
-    console.log(feedbacks);
-  }, [feedbacks]);
-
   switch (option) {
     case "Most Upvotes":
       feedbacks.sort(
-        (current: [], next: []) => next.upvotes.length - current.upvotes.length
+        (current: Feedback, next: Feedback) =>
+          next.upvotes.length - current.upvotes.length
       );
       break;
     case "Least Upvotes":
       feedbacks.sort(
-        (current: [], next: []) => current.upvotes.length - next.upvotes.length
+        (current: Feedback, next: Feedback) =>
+          current.upvotes.length - next.upvotes.length
       );
       break;
     case "Most Comments":
-      feedbacks.sort((current: [], next: []) => {
+      feedbacks.sort((current: Feedback, next: Feedback) => {
         return next.comments.length - current.comments.length;
       });
       break;
     case "Least Comments":
-      feedbacks.sort((current, next) => {
+      feedbacks.sort((current: Feedback, next: Feedback) => {
         return current.comments.length - next.comments.length;
       });
       break;
@@ -96,7 +96,7 @@ const Dashboard = ({ feedbacksAPI }: any) => {
         </div>
       </div>
       <div className="flex flex-col gap-4 flex-1 w-[100vh]">
-        <SuggestionsHeader
+        <FeedbacksHeader
           option={option}
           setOption={setSortby}
           showOptions={showOptions}
@@ -104,7 +104,7 @@ const Dashboard = ({ feedbacksAPI }: any) => {
           feedbacks={feedbacks}
         />
 
-        <Suggestions category={toggleCategory} feedbacks={feedbacks} />
+        <FeedbacksCardList category={toggleCategory} feedbacks={feedbacks} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use server";
-import EditFeedback from "@/components/forms/EditFeedback";
+import EditFeedback from "@/components/Forms/EditFeedback";
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import React from "react";

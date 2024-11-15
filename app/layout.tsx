@@ -17,7 +17,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <ThemeProvider>
-          <body className="flex justify-center m-auto container mt-10">
+          <body className="flex justify-center m-auto md:container md:mt-10 overflow-hidden">
             {children}
           </body>
         </ThemeProvider>

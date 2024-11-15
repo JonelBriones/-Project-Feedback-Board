@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import SelectOptions from "./Buttons/SelectOptions";
+import React from "react";
+import SelectOptions from "../Buttons/SelectOptions";
 
-const SuggestionsHeader = ({
+const FeedbacksHeader = ({
   option,
   setOption,
   showOptions,
@@ -60,4 +60,4 @@ const SuggestionsHeader = ({
   );
 };
 
-export default SuggestionsHeader;
+export default FeedbacksHeader;

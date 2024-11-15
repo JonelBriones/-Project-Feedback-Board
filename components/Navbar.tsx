@@ -7,7 +7,7 @@ import Image from "next/image";
 const Navbar = () => {
   const { data: session } = useSession();
   return (
-    <div className="flex justify-end mb-4">
+    <div className="flex justify-end">
       <div className="flex gap-4">
         {session?.user ? (
           <button onClick={() => signOut()}>Sign Out</button>

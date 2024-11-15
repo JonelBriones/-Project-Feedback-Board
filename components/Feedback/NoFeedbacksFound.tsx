@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const NoSuggestionsFound = () => {
+const NoFeedbacksFound = () => {
   return (
     <div className="bg-white shadow-lg drop-shadow-lg rounded-lg ">
       <div className="flex flex-col place-items-center my-[100px] gap-10  ">
@@ -27,4 +27,4 @@ const NoSuggestionsFound = () => {
   );
 };
 
-export default NoSuggestionsFound;
+export default NoFeedbacksFound;
