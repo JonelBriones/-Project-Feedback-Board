@@ -20,9 +20,9 @@ const FeedbacksCardList = ({ category, feedbacks }: any) => {
   }
 
   return (
-    <div>
+    <>
       {feedbacks.length > 0 ? (
-        <div className="flex flex-col gap-4 h-[80vh] overflow-y-auto ">
+        <div className="flex flex-col gap-4 md:h-[80vh] h-[78vh] overflow-y-auto px-4 md:p-0">
           {category == "All" &&
             feedbacks.map((feedback: any) => (
               <FeedbackCard {...feedback} key={feedback._id} />
@@ -38,7 +38,7 @@ const FeedbacksCardList = ({ category, feedbacks }: any) => {
           <NoFeedbacksFound />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -81,7 +81,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex justify-between place-items-center rounded-lg p-6 text-white bg-[#373F68] text-sm ">
+      <div className="flex justify-between place-items-center md:rounded-lg p-6 text-white bg-[#373F68] text-sm ">
         <div className="flex flex-col gap-2">
           <Link href={"/"} className="flex place-items-center gap-4">
             <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
@@ -104,10 +104,10 @@ const Roadmap = ({ feedbacksAPI }: any) => {
           + Add Feedback
         </Link>
       </div>
-      <div className="md:hidden flex flex-col h-[80vh]">
-        <div className="flex flex-col gap-8">{renderMobileHeader()}</div>
-        <div className="p-8 overflow-y-auto ">
-          <div>
+      <div className="md:hidden flex flex-col h-[80vh] overflow-y-auto ">
+        <div className="flex flex-col">{renderMobileHeader()}</div>
+        <div className="mx-8">
+          <div className="my-6">
             <h4 className="font-bold text-lg">
               {toggleStatusView} ({getStatusLength(toggleStatusView)})
             </h4>

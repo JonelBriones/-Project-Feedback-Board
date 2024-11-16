@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Feedback } from "@/types";
 import FeedbacksHeader from "./Feedback/FeedbacksHeader";
 import FeedbacksCardList from "./Feedback/FeedbacksCardList";
+import Navbar from "./Navbar";
 
 const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
@@ -39,8 +40,13 @@ const Dashboard = ({ feedbacksAPI }: any) => {
       break;
   }
   return (
-    <div className="container flex gap-6">
-      <div className="w-[255px] flex flex-col gap-4">
+    <div className="md:container flex flex-col md:flex-row  md:gap-6">
+      <Navbar
+        setToggleCategory={setToggleCategory}
+        categories={categories}
+        toggleCategory={toggleCategory}
+      />
+      {/* <div className="w-[255px] flex flex-col gap-4">
         <div className="h-[137px] flex flex-col justify-end bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
           <h4 className="font-bold">Frontend Mentor</h4>
           <p className="text-sm opacity-85">Feedback Board</p>
@@ -94,8 +100,8 @@ const Dashboard = ({ feedbacksAPI }: any) => {
             <span className="font-bold">1</span>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-4 flex-1 w-[100vh]">
+      </div> */}
+      <div className="flex flex-col gap-4 ">
         <FeedbacksHeader
           option={option}
           setOption={setSortby}
@@ -103,7 +109,6 @@ const Dashboard = ({ feedbacksAPI }: any) => {
           setSortbyOptions={setSortbyOptions}
           feedbacks={feedbacks}
         />
-
         <FeedbacksCardList category={toggleCategory} feedbacks={feedbacks} />
       </div>
     </div>

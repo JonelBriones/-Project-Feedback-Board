@@ -11,9 +11,9 @@ const FeedbacksHeader = ({
   feedbacks,
 }: any) => {
   return (
-    <div className="flex justify-between place-items-center rounded-lg p-4 text-white bg-[#373F68] text-sm">
+    <div className="flex justify-between place-items-center md:rounded-lg p-4 text-white bg-[#373F68] text-sm">
       <div className="flex gap-8 ">
-        <div className="flex gap-4 place-items-center">
+        <div className="hidden lg:flex gap-4 place-items-center">
           <Image
             src={"/images/suggestions/icon-suggestions.svg"}
             height={24}

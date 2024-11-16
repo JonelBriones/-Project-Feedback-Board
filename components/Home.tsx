@@ -4,6 +4,7 @@ import User from "@/models/User";
 import React from "react";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
+import MobileDashboardView from "./Dashboard/MobileDashboardView";
 
 const Home = async () => {
   await connectDB();
@@ -12,7 +13,9 @@ const Home = async () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <Navbar />
+      {/* <div className="hidden md:block">
+        <Navbar />
+      </div> */}
       <Dashboard
         feedbacksAPI={JSON.parse(JSON.stringify(feedbacksAPI))}
         currentUserAPI={JSON.parse(JSON.stringify(currentUserAPI))}

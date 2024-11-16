@@ -51,8 +51,9 @@ const RoadmapSuggestionCard = ({
       className={`flex flex-col bg-white p-6 gap-2 rounded-lg border-t-[4px] border-t-[${color}] `}
     >
       <span className="flex gap-4 place-items-center">
-        <div className={`size-2 bg-[#${color}] rounded-full`} />
-        <div className={`size-2 bg-[#${color}] rounded-full`} />
+        <div
+          className={`size-2 bg-[${color ? color : "#ad1fea"}] rounded-full`}
+        />
         Planned
       </span>
       <h1 className="font-bold text-lg">{title}</h1>

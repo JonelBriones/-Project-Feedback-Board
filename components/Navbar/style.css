@@ -1,0 +1,25 @@
+.slide {
+  right: -275px;
+}
+.slide.show {
+  animation: slidein 300ms ease forwards;
+}
+.slide.hide {
+  animation: slideout 300ms ease-in;
+}
+@keyframes slidein {
+  0% {
+    transform: translateX(50);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideout {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(50);
+  }
+}
