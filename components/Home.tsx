@@ -12,10 +12,7 @@ const Home = async () => {
   const currentUserAPI = await User.find({}).lean();
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* <div className="hidden md:block">
-        <Navbar />
-      </div> */}
+    <div className="flex flex-col gap-4 h-[calc(100vh-200px)]">
       <Dashboard
         feedbacksAPI={JSON.parse(JSON.stringify(feedbacksAPI))}
         currentUserAPI={JSON.parse(JSON.stringify(currentUserAPI))}

@@ -14,6 +14,7 @@ const RoadmapSuggestionCard = ({
   description,
   category,
   color,
+  status,
 }: any) => {
   const { data: session } = useSession();
   const [isLiked, setIsLiked] = useState(false);
@@ -54,7 +55,7 @@ const RoadmapSuggestionCard = ({
         <div
           className={`size-2 bg-[${color ? color : "#ad1fea"}] rounded-full`}
         />
-        Planned
+        {status}
       </span>
       <h1 className="font-bold text-lg">{title}</h1>
       <p className="text-[#647196]">{description}</p>

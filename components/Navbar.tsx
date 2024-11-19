@@ -20,9 +20,7 @@ const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
         {/* NAVBAR SHOW MOBILE */}
         {toggleNavbar && (
           <div
-            className={`absolute slide ${
-              toggleNavbar ? "show" : "hide"
-            } top-[75px] h-screen  w-[271px] flex flex-col gap-4 p-4 bg-[#f7f8fd] z-10`}
+            className={`absolute slide show top-[75px] h-screen  w-[271px] flex flex-col gap-4 p-4 bg-[#f7f8fd] z-10`}
           >
             <div className="bg-white p-4">
               <div className="flex gap-2 text-xs text-white flex-wrap">

@@ -1,29 +1,35 @@
 "use server";
+import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import GoBack from "@/components/Buttons/GoBack";
 import LinkButton from "@/components/Buttons/LinkButton";
+import CommentContainer from "@/components/Comments/CommentContainer";
+import Comments from "@/components/Comments/Comments";
 import FeedbackCard from "@/components/Feedback/FeedbackCard";
-
+import AddComment from "@/components/Forms/AddComment";
 import Feedback from "@/models/Feedback";
 
-// import convertToSerializableObject from "@/utils/convertToObject";
 const page = async ({ params }: any) => {
   const { id } = await params;
   const suggestionDoc = await Feedback.findById(id).lean();
-  // const suggestion = convertToSerializableObject(suggestionDoc);
+  const session = await auth();
   const feedback = JSON.parse(JSON.stringify(suggestionDoc));
 
   console.log("doc", suggestionDoc);
+  console.log(feedback);
+
   return (
-    <div className="container max-w-screen-lg flex flex-col gap-4">
+    <div className="container max-w-screen-lg flex flex-col gap-4 h-screen overflow-auto">
       <div className="flex place-items-center justify-between">
         <GoBack />
-        <LinkButton
-          text="Edit Feedback"
-          color="#4661e6"
-          url={`/suggestion/${id}/edit`}
-        />
+        {session?.user?.id == feedback.owner && (
+          <LinkButton
+            text="Edit Feedback"
+            color="#4661e6"
+            url={`/suggestion/${id}/edit`}
+          />
+        )}
       </div>
-      <FeedbackCard {...feedback} />
+      <CommentContainer feedback={feedback} suggestionID={id} />
     </div>
   );
 };

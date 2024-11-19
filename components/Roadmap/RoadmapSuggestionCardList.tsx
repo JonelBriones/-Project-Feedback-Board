@@ -1,5 +1,3 @@
-import upvoteAction from "@/app/_actions/users/upvoteAction";
-import Image from "next/image";
 import React from "react";
 import RoadmapSuggestionCard from "./RoadmapSuggestionCard";
 

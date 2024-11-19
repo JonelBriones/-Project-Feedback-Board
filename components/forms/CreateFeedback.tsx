@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import GoBack from "../Buttons/GoBack";
 import { addFeedback } from "@/app/_actions/addFeedback";
 
@@ -26,18 +26,28 @@ const CreateFeedback = () => {
             <label className="text-[#647196]" htmlFor={"description"}>
               Add a short, descriptive headline
             </label>
-            <input type="text" className="w-full rounded-md bg-[#f7f8fd] p-2" />
+            <input
+              type="text"
+              className="w-full rounded-md bg-[#f7f8fd] p-2"
+              name="title"
+            />
           </div>
           <div className="flex flex-col gap-2">
             <h4 className="font-bold">Category</h4>
             <label className="text-[#647196]" htmlFor={"description"}>
               Choose a category for your feedback
             </label>
+            <select name="category" id="category" className="hidden">
+              <option value={category}>{category}</option>
+            </select>
             <button
               className={`flex place-items-center p-2 px-4 w-full text-left rounded-md ${
                 showCategoryOptions ? "border-2 border-[#4661e6]" : ""
               }`}
-              onClick={() => setShowCategoryOptions(!showCategoryOptions)}
+              onClick={(e) => {
+                e.preventDefault(),
+                  setShowCategoryOptions(!showCategoryOptions);
+              }}
             >
               <span>{category}</span>
               <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
@@ -139,16 +149,18 @@ const CreateFeedback = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h4 className="font-bold">Feedback Detail</h4>
-            <label className="text-[#647196]" htmlFor={"details"}>
+            <label className="text-[#647196]" htmlFor={"description"}>
               Include any specific comments on what should be improved, added,
               etc.
             </label>
             <textarea
-              name="details"
-              id="details"
+              name="description"
+              id="description"
               className="w-full rounded-md bg-[#f7f8fd] p-2"
             />
           </div>
+
+          <button type="submit">add</button>
         </form>
       </div>
     </div>

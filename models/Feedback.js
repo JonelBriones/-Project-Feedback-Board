@@ -2,6 +2,20 @@ import { Schema, SchemaType, model, models } from "mongoose";
 
 const FeedbackSchema = new Schema(
   {
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
     title: {
       type: String,
       required: true,
@@ -29,34 +43,40 @@ const FeedbackSchema = new Schema(
           type: Schema.Types.ObjectId,
           ref: "User",
         },
-        content: {
+        imageUrl: {
           type: String,
         },
-        replyingTo: {
-          type: Schema.Types.ObjectId,
-          ref: "User",
-          require: true,
+        content: {
+          type: String,
+          require: [true, "Type your comment here"],
+        },
+        username: {
+          type: String,
         },
 
-        // replies: [
-        //   {
-        //     reply: {
-        //       owner: {
-        //         type: Schema.Types.ObjectId,
-        //         ref: "User",
-        //         require: true,
-        //       },
-        //       content: {
-        //         type: String,
-        //       },
-        //       replyingTo: {
-        //         type: Schema.Types.ObjectId,
-        //         require: true,
-        //         ref: "User",
-        //       },
-        //     },
-        //   },
-        // ],
+        replies: [
+          {
+            owner: {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+              require: true,
+            },
+            imageUrl: {
+              type: String,
+            },
+            username: {
+              type: String,
+            },
+            content: {
+              type: String,
+            },
+            replyingTo: {
+              type: Schema.Types.ObjectId,
+              require: true,
+              ref: "User",
+            },
+          },
+        ],
       },
     ],
   },

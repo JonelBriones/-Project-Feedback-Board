@@ -27,7 +27,7 @@ const upvoteAction = async (suggestionID: string) => {
   let error;
   let message;
   let upvoteCount;
-  // let isLiked = suggestion.upvotes.includes(currentUserID);
+
   let isLiked = user.upvotes.includes(suggestion._id);
   if (!isLiked) {
     console.log("upvote");

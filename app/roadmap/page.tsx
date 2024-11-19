@@ -9,14 +9,10 @@ const page = async () => {
   await connectDB();
 
   const feedbackAPI = await Feedback.find({}).lean();
-  const currentUserAPI = await User.find({}).lean();
 
   return (
     <div className="container max-w-screen-lg">
-      <Roadmap
-        feedbacksAPI={JSON.parse(JSON.stringify(feedbackAPI))}
-        currentUserAPI={JSON.parse(JSON.stringify(currentUserAPI[0]))}
-      />
+      <Roadmap feedbacksAPI={JSON.parse(JSON.stringify(feedbackAPI))} />
     </div>
   );
 };

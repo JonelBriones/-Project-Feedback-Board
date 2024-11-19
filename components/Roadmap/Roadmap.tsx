@@ -10,7 +10,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
 
   const status: any = {
     Planned: "Ideas prioritized for research",
-    "In-progress": "Currently being developed",
+    "In-Progress": "Currently being developed",
     Live: "Released features",
   };
 
@@ -18,8 +18,9 @@ const Roadmap = ({ feedbacksAPI }: any) => {
     let statusLength = feedbacksAPI.filter(
       (feedback: Feedback) => feedback.status == status.toLowerCase()
     );
+
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex-1 flex flex-col gap-8 h-[calc(100vh-200px)]">
         <div>
           <h4 className="font-bold text-lg">
             {status} ({statusLength.length})
@@ -32,25 +33,26 @@ const Roadmap = ({ feedbacksAPI }: any) => {
       </div>
     );
   }
-  function getStatusLength(status: string) {
+  function getStatusLength() {
     let arr = feedbacksAPI.filter(
-      (feedback: Feedback) => status.toLowerCase() == feedback.status
+      (feedback: Feedback) => toggleStatusView == feedback.status
     );
+    console.log(toggleStatusView);
     return arr.length;
   }
   function renderMobileHeader() {
     let statusPlanned = feedbacksAPI.filter(
-      (feedback: Feedback) => "planned" == feedback.status
+      (feedback: Feedback) => "planned" == feedback.status.toLowerCase()
     );
     let statusInProgress = feedbacksAPI.filter(
-      (feedback: Feedback) => "in-progress" == feedback.status
+      (feedback: Feedback) => "in-progress" == feedback.status.toLowerCase()
     );
     let statusLive = feedbacksAPI.filter(
-      (feedback: Feedback) => "live" == feedback.status
+      (feedback: Feedback) => "live" == feedback.status.toLowerCase()
     );
 
     return (
-      <div className="border-b border-black flex-1 flex justify-evenly">
+      <div className="border-b border-black flex-1 flex justify-evenly ">
         <button
           onClick={() => setToggleStatusView("Planned")}
           className={`w-full pb-4 border-b-4 border-[#ad1fea] ${
@@ -60,7 +62,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
           {"Planned"} ({statusPlanned.length})
         </button>
         <button
-          onClick={() => setToggleStatusView("In-progress")}
+          onClick={() => setToggleStatusView("In-Progress")}
           className={`w-full pb-4 border-b-4 border-[#ad1fea] ${
             "In-progress" == toggleStatusView ? "" : "border-opacity-0"
           }`}
@@ -104,34 +106,32 @@ const Roadmap = ({ feedbacksAPI }: any) => {
           + Add Feedback
         </Link>
       </div>
-      <div className="md:hidden flex flex-col h-[80vh] overflow-y-auto ">
+      <div className="md:hidden flex flex-col">
         <div className="flex flex-col">{renderMobileHeader()}</div>
         <div className="mx-8">
           <div className="my-6">
             <h4 className="font-bold text-lg">
-              {toggleStatusView} ({getStatusLength(toggleStatusView)})
+              {toggleStatusView} ({getStatusLength()})
             </h4>
             <p className="text-[#647196]">{status[toggleStatusView]}</p>
           </div>
-          <div className="flex flex-col gap-4 ">
-            <div className="flex flex-col gap-4">
-              {feedbacksAPI.map(
-                (feedback: any) =>
-                  feedback.status.toLowerCase() ==
-                    toggleStatusView.toLowerCase() && (
-                    <RoadmapSuggestionCard
-                      key={feedback._id}
-                      {...feedback}
-                      status={status}
-                      color={"#ad1fea"}
-                    />
-                  )
-              )}
-            </div>
+
+          <div className="flex flex-col gap-4 overflow-auto min-h-[400px] h-[calc(80vh-100px)] ">
+            {feedbacksAPI.map(
+              (feedback: any) =>
+                feedback.status.toLowerCase() ==
+                  toggleStatusView.toLowerCase() && (
+                  <RoadmapSuggestionCard
+                    key={feedback._id}
+                    {...feedback}
+                    color={"#ad1fea"}
+                  />
+                )
+            )}
           </div>
         </div>
       </div>
-      <div className="hidden md:flex gap-4 h-[80vh]">
+      <div className="hidden md:flex gap-4">
         {renderStatus("Planned", "Ideas prioritized for research", "f49f85")}
         {renderStatus("In-progress", "Currently being developed", "ad1fea")}
         {renderStatus("Live", "Released features", "62bcfa")}
