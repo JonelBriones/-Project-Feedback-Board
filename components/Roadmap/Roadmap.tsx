@@ -16,7 +16,8 @@ const Roadmap = ({ feedbacksAPI }: any) => {
 
   function renderStatus(status: string, description: string, color: string) {
     let statusLength = feedbacksAPI.filter(
-      (feedback: Feedback) => feedback.status == status.toLowerCase()
+      (feedback: Feedback) =>
+        feedback.status.toLowerCase() == status.toLowerCase()
     );
 
     return (
@@ -82,7 +83,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-screen md:w-full">
       <div className="flex justify-between place-items-center md:rounded-lg p-6 text-white bg-[#373F68] text-sm ">
         <div className="flex flex-col gap-2">
           <Link href={"/"} className="flex place-items-center gap-4">

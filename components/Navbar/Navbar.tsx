@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import "./Navbar/style.css";
+import "./style.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import MobileDashboardView from "./Dashboard/MobileDashboardView";
+import MobileDashboardView from "../Dashboard/MobileDashboardView";
 
 const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
   const { data: session } = useSession();
   const [toggleNavbar, setToggleNavbar] = useState(false);
+
   return (
     <div className="relative flex flex-row md:flex-col md:gap-4 ">
       {/*  MOBILE  */}

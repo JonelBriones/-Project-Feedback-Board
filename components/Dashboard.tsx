@@ -1,11 +1,10 @@
 "use client";
 import React, { useState } from "react";
 
-import Link from "next/link";
 import { Feedback } from "@/types";
 import FeedbacksHeader from "./Feedback/FeedbacksHeader";
 import FeedbacksCardList from "./Feedback/FeedbacksCardList";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 
 const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
@@ -46,7 +45,7 @@ const Dashboard = ({ feedbacksAPI }: any) => {
         categories={categories}
         toggleCategory={toggleCategory}
       />
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4">
         <FeedbacksHeader
           option={option}
           setOption={setSortby}
@@ -54,7 +53,6 @@ const Dashboard = ({ feedbacksAPI }: any) => {
           setSortbyOptions={setSortbyOptions}
           feedbacks={feedbacks}
         />
-
         <FeedbacksCardList category={toggleCategory} feedbacks={feedbacks} />
       </div>
     </div>

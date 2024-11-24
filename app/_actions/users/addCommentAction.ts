@@ -3,12 +3,11 @@ import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 async function addCommentAction(suggestionID: string, comment: string) {
   await connectDB();
   const sessionUser = await auth();
-  const { user, userId } = sessionUser;
+
   const suggestion = await Feedback.findById(suggestionID);
 
   if (!sessionUser || !sessionUser?.user?.id) {
@@ -19,9 +18,9 @@ async function addCommentAction(suggestionID: string, comment: string) {
   let message;
   const newComment = {
     content: comment,
-    owner: userId,
-    imageUrl: user.image,
-    username: user.name,
+    owner: sessionUser.user.id,
+    imageUrl: sessionUser.user.image,
+    username: sessionUser.user.name,
   };
 
   if (!comment) {

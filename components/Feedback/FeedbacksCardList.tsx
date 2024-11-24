@@ -27,14 +27,14 @@ const FeedbacksCardList = ({ category, feedbacks }: any) => {
             feedbacks.map((feedback: any) => (
               <FeedbackCard {...feedback} key={feedback._id} />
             ))}
-          {category == "Bug" && renderFeedback("bug")}
-          {category == "Feature" && renderFeedback("feature")}
-          {category == "Enhancement" && renderFeedback("enhancement")}
-          {category == "UX" && renderFeedback("ux")}
-          {category == "UI" && renderFeedback("ui")}
+          {category == "Bug" && renderFeedback("Bug")}
+          {category == "Feature" && renderFeedback("Feature")}
+          {category == "Enhancement" && renderFeedback("Enhancement")}
+          {category == "UX" && renderFeedback("UX")}
+          {category == "UI" && renderFeedback("UI")}
         </div>
       ) : (
-        <div className="flex flex-col gap-4 h-[80vh]">
+        <div>
           <NoFeedbacksFound />
         </div>
       )}

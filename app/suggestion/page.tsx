@@ -9,7 +9,7 @@ const page = async () => {
   const feedbacks = await Feedback.find({}).lean();
   const parsedFeedbacks = JSON.parse(JSON.stringify(feedbacks));
   return (
-    <div>
+    <div className="">
       <FeedbacksCardList feedbacks={parsedFeedbacks} />
     </div>
   );

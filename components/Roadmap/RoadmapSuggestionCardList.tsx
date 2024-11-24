@@ -5,12 +5,7 @@ const RoadmapSuggestionCardList = ({ feedbacks, color, status }: any) => {
   return feedbacks.map(
     (feedback: any) =>
       feedback.status.toLowerCase() == status.toLowerCase() && (
-        <RoadmapSuggestionCard
-          key={feedback._id}
-          {...feedback}
-          color={color}
-          status={status}
-        />
+        <RoadmapSuggestionCard key={feedback._id} {...feedback} color={color} />
       )
   );
 };

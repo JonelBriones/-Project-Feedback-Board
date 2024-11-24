@@ -1,18 +1,18 @@
 "use client";
 import addCommentAction from "@/app/_actions/users/addCommentAction";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
+
+import { useSession } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
 
 const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
   const [comment, setComment] = useState("");
   const [message, setMessage] = useState("");
-
-  const addComment = async (e: any) => {
+  const { data: session } = useSession();
+  const addComment = () => {
+    if (!session?.user?.id) redirectToSignIn();
     addCommentAction(suggestionID, comment).then((res) => {
-      console.log("RES", res);
-      if (res?.message) {
-        setMessage(res?.message);
-        console.log(res?.message);
-      }
+      setMessage(res?.message);
     });
   };
   const inputRef = useRef(null);

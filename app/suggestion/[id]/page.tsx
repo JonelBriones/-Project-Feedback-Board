@@ -1,11 +1,9 @@
 "use server";
+
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import GoBack from "@/components/Buttons/GoBack";
 import LinkButton from "@/components/Buttons/LinkButton";
 import CommentContainer from "@/components/Comments/CommentContainer";
-import Comments from "@/components/Comments/Comments";
-import FeedbackCard from "@/components/Feedback/FeedbackCard";
-import AddComment from "@/components/Forms/AddComment";
 import Feedback from "@/models/Feedback";
 
 const page = async ({ params }: any) => {
@@ -18,7 +16,7 @@ const page = async ({ params }: any) => {
   console.log(feedback);
 
   return (
-    <div className="container max-w-screen-lg flex flex-col gap-4 h-screen overflow-auto">
+    <div className="w-full max-w-screen-lg flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
         <GoBack />
         {session?.user?.id == feedback.owner && (
