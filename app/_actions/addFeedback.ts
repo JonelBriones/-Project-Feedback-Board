@@ -46,7 +46,12 @@ export const addFeedback = async (
     };
     const newSuggestion = new Feedback(suggestionData);
     await newSuggestion.save();
+
     revalidatePath("/", "layout");
-    redirect(`/suggestion/${newSuggestion._id}`);
+
+    return {
+      successMsg: "Feedback added!",
+      data: JSON.parse(JSON.stringify(newSuggestion._id)),
+    };
   }
 };

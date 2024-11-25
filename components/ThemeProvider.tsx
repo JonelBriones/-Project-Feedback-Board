@@ -1,13 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext } from "react";
 
 const defaultTheme: any = [];
 
 const ThemeContext = createContext(defaultTheme);
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [feedbacks, setFeedbacks] = useState([]);
   return (
     <ThemeContext.Provider value={defaultTheme}>
       {children}

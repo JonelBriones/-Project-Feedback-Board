@@ -8,8 +8,7 @@ const CommentCard = ({
   username,
   content,
   replies,
-  owner,
-  replyingTo,
+  _id,
   setReplyTo,
 }: any) => {
   return (
@@ -23,9 +22,11 @@ const CommentCard = ({
             alt="image-anne"
             className="rounded-full"
           />
-          <div className="flex place-items-center justify-center h-full">
-            <div className="h-[80%] bg-[#647196] w-[1px] py-4" />
-          </div>
+          {replies > 0 && (
+            <div className="flex place-items-center justify-center h-full">
+              <div className="h-[80%] bg-[#647196] w-[1px] py-4" />
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-4">
           <div className="flex justify-between">
@@ -35,20 +36,29 @@ const CommentCard = ({
             </div>
             <button
               className="font-semibold text-[#4661e6]"
-              onClick={() => setReplyTo(username)}
+              onClick={() =>
+                setReplyTo({
+                  username: username,
+                  id: _id,
+                })
+              }
             >
               Reply
             </button>
           </div>
           <p className="text-[#647196]">{content}</p>
           {replies?.map((reply: any) => (
-            <ReplyCard reply={reply} key={reply.owner} />
+            <ReplyCard
+              reply={reply}
+              key={reply._id}
+              setReplyTo={setReplyTo}
+              id={_id}
+            />
           ))}
         </div>
       </div>
 
       {!replies && <div className="border my-4"></div>}
-      {/* <div>{renderCommentCard()}</div> */}
     </>
   );
 };

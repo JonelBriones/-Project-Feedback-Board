@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import MobileDashboardView from "../Dashboard/MobileDashboardView";
+import userIcon from "@/public/images/user-images/user.png";
 
 const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
   const { data: session } = useSession();
@@ -72,30 +73,64 @@ const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
                 <span className="font-bold">1</span>
               </div>
             </div>
-            <div className="flex justify-end">
-              <div className="flex gap-4">
-                {session?.user ? (
-                  <button onClick={() => signOut()}>Sign Out</button>
-                ) : (
-                  <button onClick={() => signIn("google", { redirectTo: "/" })}>
-                    Sign In
+
+            <div className="flex gap-4">
+              {session?.user ? (
+                <>
+                  <button
+                    onClick={() => signOut()}
+                    className="p-2 px-4 w-full bg-white rounded-lg text-black"
+                  >
+                    Sign Out
                   </button>
-                )}
-                <Image
-                  width={35}
-                  height={35}
-                  src={session?.user?.image || "/images"}
-                  alt="logo"
-                  className="rounded-full"
-                />
-              </div>
+                  <Image
+                    width={35}
+                    height={35}
+                    src={session?.user?.image || userIcon}
+                    alt="logo"
+                    className="rounded-full"
+                  />
+                </>
+              ) : (
+                <button onClick={() => signIn("google", { redirectTo: "/" })}>
+                  Sign In
+                </button>
+              )}
             </div>
           </div>
         )}
       </div>
-      <div className=" hidden h-[137px] md:flex flex-col justify-end bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
-        <h4 className="font-bold">Frontend Mentor</h4>
-        <p className="text-sm opacity-85">Feedback Board</p>
+      <div className=" hidden h-[137px] md:flex flex-col justify-evenly bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
+        <div className="flex justify-between">
+          {session?.user ? (
+            <>
+              <button
+                onClick={() => signOut()}
+                className="p-2 px-4 bg-white rounded-lg text-black"
+              >
+                Sign Out
+              </button>
+              <Image
+                width={35}
+                height={35}
+                src={session?.user?.image || userIcon}
+                alt="logo"
+                className="rounded-full"
+              />
+            </>
+          ) : (
+            <button
+              onClick={() => signIn("google", { redirectTo: "/" })}
+              className="p-2 px-4 bg-white rounded-lg text-black"
+            >
+              Sign In
+            </button>
+          )}
+        </div>
+        <div>
+          <h4 className="font-bold">Frontend Mentor</h4>
+          <p className="text-sm opacity-85">Feedback Board</p>
+        </div>
       </div>
 
       <div className={`hidden md:w-[255px] md:flex flex-col gap-4`}>
@@ -146,24 +181,6 @@ const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
               <span className="opacity-65">Live</span>
             </div>
             <span className="font-bold">1</span>
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="flex gap-4">
-            {session?.user ? (
-              <button onClick={() => signOut()}>Sign Out</button>
-            ) : (
-              <button onClick={() => signIn("google", { redirectTo: "/" })}>
-                Sign In
-              </button>
-            )}
-            <Image
-              width={35}
-              height={35}
-              src={session?.user?.image || "/images"}
-              alt="logo"
-              className="rounded-full"
-            />
           </div>
         </div>
       </div>

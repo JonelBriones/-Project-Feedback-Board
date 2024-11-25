@@ -6,6 +6,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --toastify-color-success: #ad1fea;
 }
 
 @media (prefers-color-scheme: dark) {

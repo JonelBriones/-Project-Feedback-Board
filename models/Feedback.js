@@ -72,7 +72,6 @@ const FeedbackSchema = new Schema(
             },
             replyingTo: {
               type: Schema.Types.ObjectId,
-              require: true,
               ref: "User",
             },
           },

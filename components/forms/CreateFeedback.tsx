@@ -3,8 +3,9 @@ import Image from "next/image";
 import React, { useActionState, useEffect, useState } from "react";
 import GoBack from "../Buttons/GoBack";
 import { addFeedback } from "@/app/_actions/addFeedback";
-import { useFormState } from "react-dom";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 const intialState = {
   zodErrors: {},
   title: "",
@@ -19,9 +20,21 @@ const CreateFeedback = () => {
 
   const { title, description, category } = formState?.data || {};
 
+  const { successMsg, data } = formState?.successMsg || {};
+
+  const ToastSuccess = () => (
+    <Link href={`/suggestion/${formState?.data}`}>View Feedback</Link>
+  );
+  useEffect(() => {
+    if (formState.successMsg) {
+      toast.success(<ToastSuccess />);
+    }
+  }, [formState?.data]);
+
   return (
     <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
       <GoBack />
+      <ToastContainer autoClose={3000} />
       <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image
           src={"/images/shared/icon-new-feedback.svg"}

@@ -12,9 +12,6 @@ const page = async ({ params }: any) => {
   const session = await auth();
   const feedback = JSON.parse(JSON.stringify(suggestionDoc));
 
-  console.log("doc", suggestionDoc);
-  console.log(feedback);
-
   return (
     <div className="w-full max-w-screen-lg flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
