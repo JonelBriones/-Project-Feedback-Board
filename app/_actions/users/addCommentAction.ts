@@ -1,8 +1,6 @@
 "use server";
-
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
-import User from "@/models/User";
 import getSessionUser from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -36,6 +34,7 @@ async function addCommentAction(
   const newComment = {
     content: formData.get("comment"),
     replyingTo: formData.get("replyingTo") || "",
+    replyingToUsername: formData.get("replyingToUsername") || "",
     owner: sessionUser.user.id,
     imageUrl: sessionUser.user.image,
     username: sessionUser.user.name,
@@ -58,15 +57,21 @@ async function addCommentAction(
         ? { ...comment, replies: comment.replies.push(newComment) }
         : comment
     );
-
-    // console.log(result);
-    // suggestion.comments.push(newComment);
     await suggestion.save();
+    revalidatePath("/", "layout");
+    return {
+      data: {
+        ...prevState?.data,
+        resetReply: true,
+      },
+    };
   } else {
-    console.log("NEW COMMENT", newComment);
     suggestion.comments.push(newComment);
     await suggestion.save();
+    revalidatePath("/", "layout");
+    return {
+      successMsg: "Comment added!",
+    };
   }
-  revalidatePath("/", "layout");
 }
 export default addCommentAction;

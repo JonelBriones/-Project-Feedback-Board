@@ -1,14 +1,10 @@
 "use client";
 import addCommentAction from "@/app/_actions/users/addCommentAction";
-import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
+import { FaDeleteLeft } from "react-icons/fa6";
 
-import { useSession } from "next-auth/react";
-import { useParams, usePathname } from "next/navigation";
 import React, { useActionState, useEffect, useRef, useState } from "react";
 
 const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
-  console.log(replyTo);
-  const { data: session } = useSession();
   const [commentText, setComment] = useState("");
 
   let intialState = {
@@ -16,23 +12,19 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
     replyingTo: replyTo.id,
     suggestionID: suggestionID,
   };
-  const [message, setMessage] = useState("");
-
-  const addCommentActionWithId = addCommentAction.bind(
-    null,
-    intialState,
-    suggestionID
-  );
-
+  const [message] = useState("");
+  const inputRef = useRef(null);
   const [commentForm, formAction] = useActionState(
     addCommentAction,
     intialState
   );
+  const { data } = commentForm || {};
 
-  const { comment, replyingTo, data } = commentForm || {};
-  console.log(commentForm);
-
-  const inputRef = useRef(null);
+  useEffect(() => {
+    if (data?.resetReply) {
+      location.reload();
+    }
+  }, [data?.resetReply]);
   useEffect(() => {
     if (inputRef.current && replyTo.username) {
       inputRef?.current.focus();
@@ -49,6 +41,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
         <label htmlFor="comment" className="font-bold text-black">
           Add Comment
         </label>
+
         <input
           type="text"
           name="suggestionID"
@@ -64,49 +57,49 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
           defaultValue={replyTo.id}
         />
 
-        <div className="relative">
-          {replyTo.username ? (
-            <>
-              <label htmlFor="replyingTo">@{replyTo.username}</label>
-              <input
-                type="text"
-                className="p-4 bg-[#f7f7fd] hidden"
-                name="replyingTo"
-                id="replyingTo"
-                defaultValue={replyTo.username}
-              />
-              <textarea
-                ref={inputRef}
-                name="comment"
-                id="comment"
-                className="w-full bg-[#f7f7fd] rounded-lg p-4"
-                placeholder="Add a reply..."
-                onChange={(e) => setComment(e.target.value)}
-                // defaultValue={replyTo.username ? "@" + replyTo.username : ""}
-                defaultValue={data?.comment}
-              />
-            </>
-          ) : (
-            <textarea
-              ref={inputRef}
-              name="comment"
-              id="comment"
-              className="w-full bg-[#f7f7fd] rounded-lg p-4"
-              placeholder="Add a comment..."
-              onChange={(e) => setComment(e.target.value)}
-              defaultValue={data?.comment}
-            />
+        <input
+          type="text"
+          className="p-4 bg-[#f7f7fd] hidden"
+          name="replyingToUsername"
+          id="replyingToUsername"
+          defaultValue={replyTo.username}
+        />
+        <div className="relative flex flex-col gap-4">
+          {replyTo.username && (
+            <div
+              className="flex gap-4 place-items-center cursor-pointer"
+              onClick={() =>
+                setReplyTo({
+                  username: "",
+                  id: "",
+                })
+              }
+            >
+              <span className="text-[#ad1fea] font-bold">
+                @{replyTo.username?.toLowerCase()}
+              </span>
+              <FaDeleteLeft color="#000" size={20} />
+            </div>
           )}
-          {commentForm?.zodErrors?.comment && (
-            <span>{commentForm?.zodErrors?.comment}</span>
-          )}
-          <span className="absolute -bottom-4 left-0 text-sm text-[#647196]">
-            {250 - commentText.length} Characters left
-          </span>
+          <textarea
+            ref={inputRef}
+            name="comment"
+            id="comment"
+            className="w-full bg-[#f7f7fd] rounded-lg p-4"
+            placeholder="Add a comment..."
+            onChange={(e) => setComment(e.target.value)}
+            defaultValue={data?.comment}
+          />
         </div>
         <div className="flex justify-between place-items-center">
-          <span className=" text-[#647196]">{message}</span>
-
+          <div className="flex flex-col">
+            <span className="text-sm text-[#647196]">
+              {250 - commentText.length} Characters left
+            </span>
+            {commentForm?.zodErrors?.comment && (
+              <span>{commentForm?.zodErrors?.comment}</span>
+            )}
+          </div>
           <button
             type="submit"
             className="bg-[#ad1fea] p-4 px-8 rounded-xl font-bold text-white"

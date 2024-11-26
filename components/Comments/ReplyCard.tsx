@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const ReplyCard = ({ reply, setReplyTo, id }: any) => {
-  const { imageUrl, username, content, replies } = reply;
+  const { imageUrl, username, content, replies, replyingToUsername } = reply;
 
   return (
     <div className="flex justify-between gap-8">
@@ -35,7 +35,12 @@ const ReplyCard = ({ reply, setReplyTo, id }: any) => {
               Reply
             </button>
           </div>
-          <p className="text-[#647196] my-4">{content}</p>
+          <p className="text-[#647196] my-4">
+            <span className="text-[#ad1fea] font-bold">
+              @{replyingToUsername?.toLowerCase()}
+            </span>{" "}
+            {content}
+          </p>
         </div>
         {replies?.map((reply) => (
           <ReplyCard reply={reply} key={reply._id} />

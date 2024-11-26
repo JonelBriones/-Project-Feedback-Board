@@ -14,7 +14,7 @@ const CommentCard = ({
   return (
     <>
       <div className="flex justify-between gap-8">
-        <div className="flex-none">
+        <div className="flex-none flex flex-col gap-4">
           <Image
             src={imageUrl ? imageUrl : userIcon}
             width={40}
@@ -22,9 +22,9 @@ const CommentCard = ({
             alt="image-anne"
             className="rounded-full"
           />
-          {replies > 0 && (
-            <div className="flex place-items-center justify-center h-full">
-              <div className="h-[80%] bg-[#647196] w-[1px] py-4" />
+          {replies.length > 0 && (
+            <div className="flex justify-center h-full">
+              <div className=" h-[calc(100%-80px)] bg-[#647196] w-[1px] py-4 opacity-10 " />
             </div>
           )}
         </div>
