@@ -6,6 +6,9 @@ import { addFeedback } from "@/app/_actions/addFeedback";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+
+import { useSession } from "next-auth/react";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 const intialState = {
   zodErrors: {},
   title: "",
@@ -13,14 +16,12 @@ const intialState = {
   category: "",
 };
 const CreateFeedback = () => {
+  const { data: session } = useSession();
   const [categorySelected, setCategory] = useState("Feature");
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
-
   const [formState, formAction] = useActionState(addFeedback, intialState);
 
   const { title, description, category } = formState?.data || {};
-
-  const { successMsg, data } = formState?.successMsg || {};
 
   const ToastSuccess = () => (
     <Link href={`/suggestion/${formState?.data}`}>View Feedback</Link>
@@ -200,6 +201,7 @@ const CreateFeedback = () => {
 
           <button
             type="submit"
+            onClick={() => !session?.user?.id && redirectToSignIn()}
             className="bg-[#ad1fea] p-4 px-8 rounded-xl font-bold text-white"
           >
             Add Feedback

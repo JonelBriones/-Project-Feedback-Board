@@ -4,9 +4,9 @@ import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import getSessionUser from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { FeedbackSchema, feedbackSchema } from "../_schemas/feedback";
 import { FeedbackFormState } from "../_types/feedback";
+import redirectToSignIn from "./users/redirectToSignIn";
 // FeedbackFormState<FeedbackSchema>,
 export const addFeedback = async (
   prevState: any,
@@ -16,7 +16,8 @@ export const addFeedback = async (
   const sessionUser = await getSessionUser();
 
   if (!sessionUser?.userId || !sessionUser) {
-    throw new Error("User must be logged in.");
+    // throw new Error("User must be logged in.");
+    redirectToSignIn();
   }
 
   const unvalidatedFeedback = {

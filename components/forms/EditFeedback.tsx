@@ -15,7 +15,7 @@ const EditFeedback = ({ feedback }: any) => {
   const updateSuggestionById = editSuggestion.bind(null, feedback._id);
 
   return (
-    <div className="max-w-[540px] w-[100vw]">
+    <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
       <GoBack />
       <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image

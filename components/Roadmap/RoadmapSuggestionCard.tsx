@@ -1,5 +1,6 @@
 "use client";
 import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 import upvoteAction from "@/app/_actions/users/upvoteAction";
 import LoadingPage from "@/app/loading";
 import { useSession } from "next-auth/react";
@@ -24,7 +25,7 @@ const RoadmapSuggestionCard = ({
     setLoading(true);
     if (!session) {
       console.log("user needs to sign in");
-      return;
+      redirectToSignIn();
     }
     upvoteAction(_id).then((res) => {
       if (res.error) return console.log(res.error);

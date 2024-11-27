@@ -3,7 +3,8 @@ import Image from "next/image";
 import React from "react";
 
 const ReplyCard = ({ reply, setReplyTo, id }: any) => {
-  const { imageUrl, username, content, replies, replyingToUsername } = reply;
+  const { imageUrl, username, content, replies, replyingToUsername, _id } =
+    reply;
 
   return (
     <div className="flex justify-between gap-8">

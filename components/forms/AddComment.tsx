@@ -3,8 +3,11 @@ import addCommentAction from "@/app/_actions/users/addCommentAction";
 import { FaDeleteLeft } from "react-icons/fa6";
 
 import React, { useActionState, useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 
 const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
+  const { data: session } = useSession();
   const [commentText, setComment] = useState("");
 
   let intialState = {
@@ -12,7 +15,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
     replyingTo: replyTo.id,
     suggestionID: suggestionID,
   };
-  const [message] = useState("");
+
   const inputRef = useRef(null);
   const [commentForm, formAction] = useActionState(
     addCommentAction,
@@ -97,11 +100,14 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
               {250 - commentText.length} Characters left
             </span>
             {commentForm?.zodErrors?.comment && (
-              <span>{commentForm?.zodErrors?.comment}</span>
+              <span className="text-red-500 text-sm">
+                {commentForm?.zodErrors?.comment}
+              </span>
             )}
           </div>
           <button
             type="submit"
+            onClick={() => !session?.user?.id && redirectToSignIn()}
             className="bg-[#ad1fea] p-4 px-8 rounded-xl font-bold text-white"
           >
             Post Comment

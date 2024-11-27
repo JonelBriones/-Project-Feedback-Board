@@ -6,6 +6,7 @@ import Link from "next/link";
 import upvoteAction from "@/app/_actions/users/upvoteAction";
 import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
 import LoadingPage from "@/app/loading";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 
 const FeedbackCard = ({
   _id,
@@ -23,7 +24,7 @@ const FeedbackCard = ({
     setLoading(true);
     if (!session) {
       console.log("user needs to sign in");
-      return;
+      redirectToSignIn();
     }
     upvoteAction(_id).then((res) => {
       if (res.error) return console.log(res.error);

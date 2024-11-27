@@ -13,7 +13,7 @@ const page = async ({ params }: any) => {
   const feedback = JSON.parse(JSON.stringify(suggestionDoc));
 
   return (
-    <div className="w-full max-w-screen-lg flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
+    <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
         <GoBack />
         {session?.user?.id == feedback.owner && (
