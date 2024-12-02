@@ -25,7 +25,6 @@ const upvoteAction = async (suggestionID: string) => {
   const user = await User.findById(session?.user?.id);
 
   let error;
-  let message;
   let upvoteCount;
 
   let isLiked = user.upvotes.includes(suggestion._id);

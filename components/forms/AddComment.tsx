@@ -16,7 +16,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
     suggestionID: suggestionID,
   };
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [commentForm, formAction] = useActionState(
     addCommentAction,
     intialState

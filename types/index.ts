@@ -1,5 +1,6 @@
 export type Feedback = {
   _id: String;
+  owner: String;
   title: String;
   category: String;
   description: String;
@@ -13,4 +14,12 @@ export type Comment = {
   replyingTo: String;
   owner: String;
   replies?: Comment[];
+};
+
+export type Reply = {
+  owner: String;
+  imageUrl: String;
+  username: String;
+  content: String;
+  _id: String;
 };

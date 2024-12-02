@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "app/api/auth/[...nextauth]/route.js",
     "utils/upvoteStatus.js",
-    "middleware/middleware.js"
+    "middleware/middleware.js",
+    "utils/requests.js"
   ],
   "exclude": ["node_modules"]
 }

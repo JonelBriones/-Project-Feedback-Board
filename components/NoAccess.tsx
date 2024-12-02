@@ -2,7 +2,11 @@ import GoBack from "@/components/Buttons/GoBack";
 import React from "react";
 import { IoIosWarning } from "react-icons/io";
 
-const NoAccess = ({ id }) => {
+type Id = {
+  id: string;
+};
+
+const NoAccess = ({ id }: Id) => {
   return (
     <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
       <GoBack url={`/suggestion/${id}`} />

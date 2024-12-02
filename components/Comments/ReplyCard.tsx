@@ -1,4 +1,5 @@
 import userIcon from "@/public/images/user-images/user.png";
+import { Reply } from "@/types";
 import Image from "next/image";
 import React from "react";
 
@@ -43,7 +44,7 @@ const ReplyCard = ({ reply, setReplyTo, id }: any) => {
             {content}
           </p>
         </div>
-        {replies?.map((reply) => (
+        {replies?.map((reply: Reply) => (
           <ReplyCard reply={reply} key={reply._id} />
         ))}
       </div>

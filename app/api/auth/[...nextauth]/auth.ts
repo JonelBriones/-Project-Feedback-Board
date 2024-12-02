@@ -5,4 +5,4 @@ import { authOptions } from "@/utils/authOptions";
 
 // export { handler as GET, handler as POST };
 
-export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
+export const { handlers, signIn, signOut, auth } = NextAuth(authOptions as any);

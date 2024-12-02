@@ -52,7 +52,7 @@ async function addCommentAction(
     };
   } else if (newComment.replyingTo) {
     console.log("REPLYING TO ID", newComment.replyingTo);
-    suggestion.comments.map((comment) =>
+    suggestion.comments.map((comment: any) =>
       comment._id == newComment.replyingTo
         ? { ...comment, replies: comment.replies.push(newComment) }
         : comment

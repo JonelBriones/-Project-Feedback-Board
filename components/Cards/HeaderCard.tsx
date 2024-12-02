@@ -1,7 +1,8 @@
 import React from "react";
 import LinkButton from "../Buttons/LinkButton";
+import Link from "next/link";
 
-const HeaderCard = () => {
+const HeaderCard = ({ id }: any) => {
   return (
     <div className="flex justify-between place-items-center rounded-lg p-6 text-white bg-[#373F68] text-sm">
       <div className="flex flex-col gap-2">
