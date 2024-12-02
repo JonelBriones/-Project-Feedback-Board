@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
     // add this when creating next js project without eslint
     ignoreDuringBuilds: true,
   },
+
+  compilerOptions: {
+    baseUrl: ".",
+    paths: {
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+    },
+  },
 };
 
 export default nextConfig;
