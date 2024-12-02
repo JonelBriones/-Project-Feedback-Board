@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 import { Feedback } from "@/types";
-import FeedbacksHeader from "./Feedback/FeedbacksHeader";
-import FeedbacksCardList from "./Feedback/FeedbacksCardList";
-import Navbar from "./Navbar/Navbar";
+import FeedbacksHeader from "./feedback/FeedbacksHeader";
+import FeedbacksCardList from "./feedback/FeedbacksCardList";
+import Navbar from "./navbar/Navbar";
 
 const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");

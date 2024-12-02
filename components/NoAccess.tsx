@@ -1,4 +1,4 @@
-import GoBack from "@/components/Buttons/GoBack";
+import GoBack from "@/components/buttons/GoBack";
 import React from "react";
 import { IoIosWarning } from "react-icons/io";
 

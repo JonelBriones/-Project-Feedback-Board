@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import SelectOptions from "../Buttons/SelectOptions";
+import SelectOptions from "../buttons/SelectOptions";
 
 const FeedbacksHeader = ({
   option,

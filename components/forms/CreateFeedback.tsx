@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useActionState, useEffect, useState } from "react";
-import GoBack from "../Buttons/GoBack";
+import GoBack from "../buttons/GoBack";
 import { addFeedback } from "@/app/_actions/addFeedback";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

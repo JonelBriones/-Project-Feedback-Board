@@ -1,8 +1,8 @@
 "use server";
 
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
-import GoBack from "@/components/Buttons/GoBack";
-import LinkButton from "@/components/Buttons/LinkButton";
+import GoBack from "@/components/buttons/GoBack";
+import LinkButton from "@/components/buttons/LinkButton";
 import CommentContainer from "@/components/Comments/CommentContainer";
 import Feedback from "@/models/Feedback";
 

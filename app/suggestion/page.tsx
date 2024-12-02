@@ -1,4 +1,4 @@
-import FeedbacksCardList from "@/components/Feedback/FeedbacksCardList";
+import FeedbacksCardList from "@/components/feedback/FeedbacksCardList";
 
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";

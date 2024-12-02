@@ -4,7 +4,7 @@ import "./style.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import MobileDashboardView from "../Dashboard/MobileDashboardView";
+import MobileDashboardView from "../dashboard/MobileDashboardView";
 import userIcon from "@/public/images/user-images/user.png";
 
 const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {

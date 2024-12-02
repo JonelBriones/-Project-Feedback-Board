@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import ReplyCard from "./ReplyCard";
+
 import userIcon from "@/public/images/user-images/user.png";
+import ReplyCard from "./ReplyCard";
+
 const CommentCard = ({
   imageUrl,
   username,

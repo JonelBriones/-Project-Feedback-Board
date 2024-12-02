@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import GoBack from "../Buttons/GoBack";
+import GoBack from "../buttons/GoBack";
 import { editSuggestion } from "@/app/_actions/editSuggestion";
 import { deleteSuggestion } from "@/app/_actions/deleteSuggestion";
 import Link from "next/link";

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import FeedbackCard from "../Feedback/FeedbackCard";
+import FeedbackCard from "../feedback/FeedbackCard";
+
+import AddComment from "../forms/AddComment";
 import Comments from "./Comments";
-import AddComment from "../Forms/AddComment";
 
 const CommentContainer = ({ feedback, suggestionID }: any) => {
   const [replyTo, setReplyTo] = useState({
