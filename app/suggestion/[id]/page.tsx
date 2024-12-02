@@ -3,7 +3,8 @@
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import GoBack from "@/components/buttons/GoBack";
 import LinkButton from "@/components/buttons/LinkButton";
-import CommentContainer from "@/components/Comments/CommentContainer";
+import CommentContainer from "@/components/comments/CommentContainer";
+
 import Feedback from "@/models/Feedback";
 
 const page = async ({ params }: any) => {

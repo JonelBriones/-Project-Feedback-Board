@@ -1,9 +1,9 @@
 "use server";
-import React, { useState } from "react";
-import Roadmap from "@/components/Roadmap/Roadmap";
+import React from "react";
+
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
-import User from "@/models/User";
+import Roadmap from "@/components/roadmap/Roadmap";
 
 const page = async () => {
   await connectDB();
