@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     ],
   },
   eslint: {
+    // add this when creating next js project without eslint
     ignoreDuringBuilds: true,
   },
 };
