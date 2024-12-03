@@ -1,7 +1,7 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
 const NotFoundPage = () => {
-  return <div>NotFoundPage</div>;
+  redirect("/");
 };
 
 export default NotFoundPage;

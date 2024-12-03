@@ -34,7 +34,6 @@ const CommentCard = ({
           <div className="flex justify-between">
             <div className="flex flex-col">
               <span className="font-bold text-[#3a4374]">{username}</span>
-              <span className="text-[#647196]">@{username}</span>
             </div>
             <button
               className="font-semibold text-[#4661e6]"

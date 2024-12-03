@@ -1,23 +1,23 @@
 "use server";
 import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
-import getSessionUser from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import redirectToSignIn from "./redirectToSignIn";
+import { auth } from "@/app/api/auth/[...nextauth]/auth";
 async function addCommentAction(
   prevState: any,
   formData: FormData
 ): Promise<any> {
   await connectDB();
-  const sessionUser = await getSessionUser();
-  console.log("PREV STATE", prevState);
-  // console.log("SUGGESTION ID", suggestionID);
-  console.log("FORM DATA", formData);
 
   const suggestion = await Feedback.findById(formData.get("suggestionID"));
+  const sessionUser = await auth();
 
   if (!sessionUser || !sessionUser?.user?.id) {
-    throw new Error("User must be signed in");
+    // throw new Error("User must be signed in");
+    redirectToSignIn();
+    return;
   }
 
   const unvalidatedComment = {

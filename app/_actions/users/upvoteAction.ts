@@ -4,44 +4,37 @@ import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import User from "@/models/User";
 import { revalidatePath } from "next/cache";
-import getSessionUser from "@/utils/getSessionUser";
 import { error } from "console";
+import redirectToSignIn from "./redirectToSignIn";
 const upvoteAction = async (suggestionID: string) => {
   await connectDB();
 
-  // const session = await auth();
-
-  // const sessionUser = await getSessionUser();
-  const session = await auth();
-
-  console.log("SESSION AUTH", session);
-
   const suggestion = await Feedback.findById(suggestionID);
+  const sessionUser = await auth();
+  const currentUserID = sessionUser?.user?.id;
 
-  const currentUserID = session?.user?.id;
-  if (!suggestion) {
-    throw new Error("Suggestion does not exist");
+  if (!sessionUser || !sessionUser?.user?.id) {
+    // throw new Error("User must be signed in");
+    redirectToSignIn();
+    return;
   }
-  const user = await User.findById(session?.user?.id);
+  const user = await User.findById(sessionUser?.user?.id);
 
   let error;
   let upvoteCount;
 
   let isLiked = user.upvotes.includes(suggestion._id);
   if (!isLiked) {
-    console.log("upvote");
     suggestion.upvotes.push(currentUserID);
 
     isLiked = true;
     user.upvotes.push(suggestionID);
   } else {
-    console.log("remove upvote");
     isLiked = false;
     suggestion.upvotes.pull(currentUserID);
     user.upvotes.pull(suggestionID);
   }
 
-  console.log("USER", user);
   await suggestion.save();
   await user.save();
 
