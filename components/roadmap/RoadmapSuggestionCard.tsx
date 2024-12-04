@@ -28,9 +28,8 @@ const RoadmapSuggestionCard = ({
       redirectToSignIn();
     }
     upvoteAction(_id).then((res) => {
-      if (res.error) return console.log(res.error);
-      setIsLiked(res.isLiked);
-      setUpvotedLength(res.upvoteCount);
+      setIsLiked(res?.isLiked);
+      setUpvotedLength(res?.upvoteCount);
       setLoading(false);
     });
   };
@@ -41,8 +40,7 @@ const RoadmapSuggestionCard = ({
       return;
     }
     getUpvoteStatusAction(_id).then((res) => {
-      if (res.error) return console.log(res.error);
-      if (res.isLiked) setIsLiked(res.isLiked);
+      if (res?.isLiked) setIsLiked(res?.isLiked);
       setLoading(false);
     });
   }, [upvotes]);
