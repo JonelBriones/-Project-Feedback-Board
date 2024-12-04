@@ -29,7 +29,8 @@ const page = async ({ params }: any) => {
 
   return (
     <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
-      <div className="flex place-items-center justify-between">
+      {id}
+      {/* <div className="flex place-items-center justify-between">
         <GoBack />
         {session?.user?.id == suggestionById?.owner && (
           <LinkButton
@@ -39,7 +40,7 @@ const page = async ({ params }: any) => {
           />
         )}
       </div>
-      <CommentContainer feedback={suggestionById} suggestionID={id} />
+      <CommentContainer feedback={suggestionById} suggestionID={id} /> */}
     </div>
   );
 };
