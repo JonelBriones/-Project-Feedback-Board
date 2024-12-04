@@ -16,14 +16,14 @@ const page = async ({ params }: any) => {
   if (id.length != 24) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
-  const result = await Feedback.findById(id).lean();
+  const result = await Feedback.findById(id);
 
   if (!result) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
 
   // const suggestionById: FeedbackT | null = convertToSerializableObject(result);
-  // const suggestionById = JSON.parse(JSON.stringify(result));
+  const suggestionById = JSON.parse(JSON.stringify(result));
 
   // const session: Session | null = await auth();
 
@@ -38,8 +38,8 @@ const page = async ({ params }: any) => {
             url={`/suggestion/${id}/edit`}
           />
         )}
-      </div>
-      <CommentContainer feedback={suggestionById} suggestionID={id} /> */}
+      </div> */}
+      <CommentContainer feedback={suggestionById} suggestionID={id} />
     </div>
   );
 };
