@@ -27,7 +27,7 @@ const FeedbackCard = ({
       redirectToSignIn();
     }
     upvoteAction(_id).then((res) => {
-      if (res?.error) setIsLiked(res?.isLiked);
+      setIsLiked(res?.isLiked);
       setUpvotedLength(res?.upvoteCount);
       setLoading(false);
     });
@@ -39,7 +39,7 @@ const FeedbackCard = ({
       return;
     }
     getUpvoteStatusAction(_id).then((res) => {
-      if (res?.error) if (res?.isLiked) setIsLiked(res?.isLiked);
+      if (res?.isLiked) setIsLiked(res?.isLiked);
       setLoading(false);
     });
   }, [upvotes, session?.user?.id]);
