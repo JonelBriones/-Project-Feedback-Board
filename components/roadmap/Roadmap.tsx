@@ -38,7 +38,6 @@ const Roadmap = ({ feedbacksAPI }: any) => {
     let arr = feedbacksAPI.filter(
       (feedback: Feedback) => toggleStatusView == feedback.status
     );
-    console.log(toggleStatusView);
     return arr.length;
   }
   function renderMobileHeader() {
