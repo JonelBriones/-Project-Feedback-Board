@@ -9,6 +9,7 @@ import { Feedback as FeedbackT } from "@/types";
 import Feedback from "@/models/Feedback";
 import { convertToSerializableObject } from "@/utils/convertToObject";
 import { Session } from "next-auth";
+import getSessionUser from "@/utils/getSessionUser";
 
 const page = async ({ params }: any) => {
   const { id } = await params;
@@ -24,7 +25,8 @@ const page = async ({ params }: any) => {
 
   const suggestionById: FeedbackT | null = convertToSerializableObject(result);
 
-  const session: Session | null = await auth();
+  // const session: Session | null = await auth();
+  const session = await getSessionUser();
 
   return (
     <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
