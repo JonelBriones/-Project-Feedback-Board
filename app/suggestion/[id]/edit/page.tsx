@@ -8,6 +8,7 @@ import { convertToSerializableObject } from "@/utils/convertToObject";
 import React from "react";
 import mongoose from "mongoose";
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
+
 const page = async ({ params }: any) => {
   const { id } = await params;
   await connectDB();
@@ -16,18 +17,20 @@ const page = async ({ params }: any) => {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
 
-  const suggestionById = await Feedback.findById(id);
+  const suggestionResult = await Feedback.findById(id).lean();
 
-  if (!suggestionById) {
+  if (!suggestionResult) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
+  const suggestionById: FeedbackT | null =
+    convertToSerializableObject(suggestionResult);
 
   const sessionUser = await auth();
 
   if (!sessionUser || !sessionUser?.user?.id) {
     return <NoAccess url={"/"} id={id} text={"User must be signed in."} />;
   }
-  if (sessionUser?.user?.id != suggestionById) {
+  if (sessionUser?.user?.id != suggestionById?.owner) {
     return (
       <NoAccess
         url={"/"}
@@ -40,20 +43,10 @@ const page = async ({ params }: any) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
-  const result = await Feedback.findById(id).lean();
-
-  if (!result) {
-    return <NoAccess url={"/"} id={id} text={"Suggestion not found.."} />;
-  }
-  const feedback: FeedbackT | null = convertToSerializableObject(result);
-
-  if (!feedback?._id || !feedback) {
-    throw new Error("Feedback not found");
-  }
 
   return (
     <div>
-      <EditFeedback feedback={JSON.parse(JSON.stringify(feedback))} />
+      <EditFeedback feedback={JSON.parse(JSON.stringify(suggestionById))} />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import CommentContainer from "@/components/comments/CommentContainer";
 import NoAccess from "@/components/NoAccess";
 import { Feedback as FeedbackT } from "@/types";
 import Feedback from "@/models/Feedback";
+import { convertToSerializableObject } from "@/utils/convertToObject";
 
 const page = async ({ params }: any) => {
   const { id } = await params;
@@ -14,14 +15,13 @@ const page = async ({ params }: any) => {
   if (id.length != 24) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
-
-  const result: FeedbackT | null = await Feedback.findById(id);
+  const result = await Feedback.findById(id).lean();
 
   if (!result) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
 
-  const feedback = JSON.parse(JSON.stringify(result));
+  const suggestionById: FeedbackT | null = convertToSerializableObject(result);
 
   const session = await auth();
 
@@ -29,7 +29,7 @@ const page = async ({ params }: any) => {
     <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
         <GoBack />
-        {session?.user?.id == feedback?.owner && (
+        {session?.user?.id == suggestionById?.owner && (
           <LinkButton
             text="Edit Feedback"
             color="#4661e6"
@@ -37,7 +37,10 @@ const page = async ({ params }: any) => {
           />
         )}
       </div>
-      <CommentContainer feedback={feedback} suggestionID={id} />
+      <CommentContainer
+        feedback={JSON.parse(JSON.stringify(suggestionById))}
+        suggestionID={id}
+      />
     </div>
   );
 };
