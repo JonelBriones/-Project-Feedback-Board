@@ -22,8 +22,7 @@ const page = async ({ params }: any) => {
   if (!suggestionResult) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
-  const suggestionById: FeedbackT | null =
-    convertToSerializableObject(suggestionResult);
+  const suggestionById = JSON.parse(JSON.stringify(suggestionResult));
 
   const sessionUser = await auth();
 

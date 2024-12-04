@@ -17,7 +17,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ profile }) {
       console.log("signing in with google");
       await connectDB();
       const userExists = await User.findOne({ email: profile.email });
@@ -31,18 +31,15 @@ export const authOptions = {
       }
       return true;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       return baseUrl;
     },
-    async session({ session, token }) {
+    async session({ session }) {
       const user = await User.findOne({ email: session.user.email });
 
       session.user.id = user._id.toString();
       console.log("SESSION", session);
       return session;
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      return token;
     },
   },
 };

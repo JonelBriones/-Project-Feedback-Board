@@ -13,10 +13,6 @@ export const editSuggestion = async (suggestionID: any, formData: any) => {
 
   const sessionUser = await auth();
 
-  if (sessionUser?.user?.id !== suggestionById.owner) {
-    return;
-  }
-
   if (!sessionUser || !sessionUser?.user?.id) {
     // throw new Error("User must be signed in");
     redirectToSignIn();

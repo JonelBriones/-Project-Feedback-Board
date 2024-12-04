@@ -19,10 +19,7 @@ const CommentContainer = ({ feedback, suggestionID }: any) => {
         replyTo={replyTo}
         setReplyTo={setReplyTo}
       />
-      <div
-        className="
-      h-[calc(50vh-100px)] overflow-y-auto"
-      >
+      <div className="overflow-y-auto">
         <Comments feedback={feedback} setReplyTo={setReplyTo} />
       </div>
     </div>

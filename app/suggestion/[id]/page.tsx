@@ -5,9 +5,7 @@ import GoBack from "@/components/buttons/GoBack";
 import LinkButton from "@/components/buttons/LinkButton";
 import CommentContainer from "@/components/comments/CommentContainer";
 import NoAccess from "@/components/NoAccess";
-import { Feedback as FeedbackT } from "@/types";
 import Feedback from "@/models/Feedback";
-import { convertToSerializableObject } from "@/utils/convertToObject";
 import { Session } from "next-auth";
 import connectDB from "@/config/database";
 
@@ -22,14 +20,12 @@ const page = async ({ params }: any) => {
   if (!result) {
     return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
   }
-
-  // const suggestionById: FeedbackT | null = convertToSerializableObject(result);
   const suggestionById = JSON.parse(JSON.stringify(result));
 
-  const session: Session | null = await auth();
+  const session = await auth();
 
   return (
-    <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
+    <div className="md:container h-[calc(100vh-100px)] flex flex-col gap-4 overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
         <GoBack />
         {session?.user?.id == suggestionById?.owner && (

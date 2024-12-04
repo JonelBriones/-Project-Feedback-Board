@@ -45,7 +45,8 @@ const Dashboard = ({ feedbacksAPI }: any) => {
         categories={categories}
         toggleCategory={toggleCategory}
       />
-      <div className="flex flex-col gap-4">
+
+      <div className="flex-grow flex flex-col gap-4">
         <FeedbacksHeader
           option={option}
           setOption={setSortby}

@@ -73,112 +73,115 @@ const CreateFeedback = () => {
                 {categorySelected}
               </option>
             </select>
-            <button
-              className={`flex place-items-center p-2 px-4 w-full text-left rounded-md ${
-                showCategoryOptions ? "border-2 border-[#4661e6]" : ""
-              }`}
-              onClick={(e) => {
-                e.preventDefault(),
-                  setShowCategoryOptions(!showCategoryOptions);
-              }}
-            >
-              <span>{categorySelected}</span>
-              <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d={showCategoryOptions ? "M1 6l4-4 4 4" : "M1 1l4 4 4-4"}
-                  stroke="#fff"
-                  strokeWidth="2"
-                  fill="none"
-                  fillRule="evenodd"
-                />
-              </svg>
-            </button>
-            {showCategoryOptions && (
-              <div className="w-full left-0 top-[70px] rounded-lg bg-white shadow-lg drop-shadow-lg ">
-                <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 shadow-lg drop-shadow  rounded-lg">
-                  <button
-                    className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-t-lg`}
-                    onClick={() => {
-                      setCategory("Feature"), setShowCategoryOptions(false);
-                    }}
-                  >
-                    <span>Feature</span>
-                    {categorySelected === "Feature" && (
-                      <Image
-                        src={"/images/shared/icon-check.svg"}
-                        width={11.03}
-                        height={7.5}
-                        alt="icon-check"
-                      />
-                    )}
-                  </button>
-                  <button
-                    className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                    onClick={() => {
-                      setCategory("UI"), setShowCategoryOptions(false);
-                    }}
-                  >
-                    <span>UI</span>
-                    {category === "UI" && (
-                      <Image
-                        src={"/images/shared/icon-check.svg"}
-                        width={11.03}
-                        height={7.5}
-                        alt="icon-check"
-                      />
-                    )}
-                  </button>
-                  <button
-                    className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                    onClick={() => {
-                      setCategory("UX"), setShowCategoryOptions(false);
-                    }}
-                  >
-                    <span>UX</span>
-                    {category === "UX" && (
-                      <Image
-                        src={"/images/shared/icon-check.svg"}
-                        width={11.03}
-                        height={7.5}
-                        alt="icon-check"
-                      />
-                    )}
-                  </button>
-                  <button
-                    className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
-                    onClick={() => {
-                      setCategory("Enhancement"), setShowCategoryOptions(false);
-                    }}
-                  >
-                    <span>Enhancement</span>
-                    {categorySelected === "Enhancement" && (
-                      <Image
-                        src={"/images/shared/icon-check.svg"}
-                        width={11.03}
-                        height={7.5}
-                        alt="icon-check"
-                      />
-                    )}
-                  </button>
-                  <button
-                    className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-b-lg`}
-                    onClick={() => {
-                      setCategory("Bug"), setShowCategoryOptions(false);
-                    }}
-                  >
-                    <span>Bug</span>
-                    {categorySelected === "Bug" && (
-                      <Image
-                        src={"/images/shared/icon-check.svg"}
-                        width={11.03}
-                        height={7.5}
-                        alt="icon-check"
-                      />
-                    )}
-                  </button>
+            <div className="relative">
+              <button
+                className={`flex place-items-center p-2 px-4 w-full text-left rounded-md ${
+                  showCategoryOptions ? "border-2 border-[#4661e6]" : ""
+                }`}
+                onClick={(e) => {
+                  e.preventDefault(),
+                    setShowCategoryOptions(!showCategoryOptions);
+                }}
+              >
+                <span>{categorySelected}</span>
+                <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d={showCategoryOptions ? "M1 6l4-4 4 4" : "M1 1l4 4 4-4"}
+                    stroke="#fff"
+                    strokeWidth="2"
+                    fill="none"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </button>
+              {showCategoryOptions && (
+                <div className="absolute w-full left-0 top-[50px] rounded-lg bg-white shadow-lg drop-shadow-lg ">
+                  <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 shadow-lg drop-shadow  rounded-lg">
+                    <button
+                      className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-t-lg`}
+                      onClick={() => {
+                        setCategory("Feature"), setShowCategoryOptions(false);
+                      }}
+                    >
+                      <span>Feature</span>
+                      {categorySelected === "Feature" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setCategory("UI"), setShowCategoryOptions(false);
+                      }}
+                    >
+                      <span>UI</span>
+                      {category === "UI" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setCategory("UX"), setShowCategoryOptions(false);
+                      }}
+                    >
+                      <span>UX</span>
+                      {category === "UX" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea]`}
+                      onClick={() => {
+                        setCategory("Enhancement"),
+                          setShowCategoryOptions(false);
+                      }}
+                    >
+                      <span>Enhancement</span>
+                      {categorySelected === "Enhancement" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                    <button
+                      className={`flex justify-between place-items-center text-left w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-b-lg`}
+                      onClick={() => {
+                        setCategory("Bug"), setShowCategoryOptions(false);
+                      }}
+                    >
+                      <span>Bug</span>
+                      {categorySelected === "Bug" && (
+                        <Image
+                          src={"/images/shared/icon-check.svg"}
+                          width={11.03}
+                          height={7.5}
+                          alt="icon-check"
+                        />
+                      )}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <h4 className="font-bold">Feedback Detail</h4>

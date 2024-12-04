@@ -8,8 +8,11 @@ import MobileDashboardView from "../dashboard/MobileDashboardView";
 import userIcon from "@/public/images/user-images/user.png";
 
 const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
   const [toggleNavbar, setToggleNavbar] = useState(false);
+  console.log("SESSION:", session);
+  console.log("STATUS:", status);
 
   return (
     <div className="relative flex flex-row md:flex-col md:gap-4 ">
@@ -75,7 +78,7 @@ const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
             </div>
 
             <div className="flex justify-between gap-4 place-items-center">
-              {session?.user ? (
+              {status === "authenticated" ? (
                 <>
                   <button
                     onClick={() => signOut()}
@@ -102,7 +105,7 @@ const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
       </div>
       <div className=" hidden h-[137px] md:flex flex-col justify-evenly bg-white rounded-lg p-4 text-white bg-gradient-to-r from-[#28A7ED] via-[#A337F6] to-[#E84D70]">
         <div className="flex justify-between gap-4 place-items-center">
-          {session?.user ? (
+          {status === "authenticated" ? (
             <>
               <button
                 onClick={() => signOut()}
