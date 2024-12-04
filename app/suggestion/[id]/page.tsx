@@ -13,19 +13,19 @@ import { Session } from "next-auth";
 const page = async ({ params }: any) => {
   const { id } = await params;
 
-  if (id.length != 24) {
-    return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
-  }
-  const result = await Feedback.findById(id).lean();
+  // if (id.length != 24) {
+  //   return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
+  // }
+  // const result = await Feedback.findById(id).lean();
 
-  if (!result) {
-    return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
-  }
+  // if (!result) {
+  //   return <NoAccess url={"/"} id={id} text={"Suggestion not found."} />;
+  // }
 
   // const suggestionById: FeedbackT | null = convertToSerializableObject(result);
-  const suggestionById = JSON.parse(JSON.stringify(result));
+  // const suggestionById = JSON.parse(JSON.stringify(result));
 
-  const session: Session | null = await auth();
+  // const session: Session | null = await auth();
 
   return (
     <div className="max-w-[540px] w-[100vw] flex flex-col gap-4 h-screen overflow-auto mt-10 md:mt-0">
