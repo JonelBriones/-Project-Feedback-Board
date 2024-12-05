@@ -6,7 +6,7 @@ const Comments = ({ feedback, setReplyTo }: any) => {
   const { comments } = feedback;
   const newestOrder = [...comments].reverse();
   return (
-    <div className="p-8 flex flex-col gap-4 bg-white rounded-lg">
+    <div className="p-8 flex flex-col gap-4 bg-white">
       <h1>{feedback.comments.length} Comments</h1>
       {newestOrder.map((comment: any) => (
         <CommentCard

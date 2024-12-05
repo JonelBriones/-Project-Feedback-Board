@@ -20,7 +20,7 @@ const CommentContainer = ({ feedback, suggestionID }: any) => {
   return (
     <div className="grid md:flex flex-col gap-4 md:overflow-hidden" id="top">
       <FeedbackCard {...feedback} />
-      <div className="overflow-y-auto h-[calc(80vh-100px)]">
+      <div className="overflow-y-auto h-[calc(80vh-100px)] rounded-lg">
         <AddComment
           suggestionID={suggestionID}
           replyTo={replyTo}

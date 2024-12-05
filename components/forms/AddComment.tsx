@@ -39,7 +39,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
   }, [replyTo]);
 
   return (
-    <div className="p-8 bg-white rounded-lg">
+    <div className="p-8 bg-white">
       <form action={formAction} className="flex flex-col gap-2">
         <label htmlFor="comment" className="font-bold text-black">
           Add Comment

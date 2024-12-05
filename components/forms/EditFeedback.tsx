@@ -16,7 +16,7 @@ const EditFeedback = ({ feedback }: any) => {
 
   return (
     <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
-      <GoBack />
+      <GoBack url={`/suggestion/${feedback._id}`} />
       <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image
           src={"/images/shared/icon-new-feedback.svg"}

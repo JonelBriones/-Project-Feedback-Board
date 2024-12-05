@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import upvoteAction from "@/app/_actions/users/upvoteAction";
 import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
-import LoadingPage from "@/app/loading";
 import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
+import LoadingSpinner from "../loading/LoadingSpinner";
 
 const FeedbackCard = ({
   _id,
@@ -49,7 +49,7 @@ const FeedbackCard = ({
         {loading ? (
           <div className="flex place-items-center w-[40px] h-[60px] justify-center p-3 text-sm">
             <div>
-              <LoadingPage loading={loading} color={"#ad1fea"} size={20} />
+              <LoadingSpinner loading={loading} size={20} />
             </div>
           </div>
         ) : (

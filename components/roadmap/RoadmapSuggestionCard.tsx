@@ -2,10 +2,10 @@
 import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
 import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 import upvoteAction from "@/app/_actions/users/upvoteAction";
-import LoadingPage from "@/app/loading";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../loading/LoadingSpinner";
 
 const RoadmapSuggestionCard = ({
   _id,
@@ -64,7 +64,7 @@ const RoadmapSuggestionCard = ({
       <div className="flex justify-between">
         {loading ? (
           <div className="flex justify-start px-4 py-2">
-            <LoadingPage loading={loading} color={"#ad1fea"} size={20} />
+            <LoadingSpinner loading={loading} size={20} />
           </div>
         ) : (
           <button

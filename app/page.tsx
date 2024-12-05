@@ -3,6 +3,7 @@ import connectDB from "@/config/database";
 import Feedback from "@/models/Feedback";
 import User from "@/models/User";
 import React from "react";
+import { auth } from "./api/auth/[...nextauth]/auth";
 
 const page = async () => {
   await connectDB();
