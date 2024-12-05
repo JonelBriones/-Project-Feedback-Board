@@ -7,19 +7,24 @@ import FeedbacksCardList from "./feedback/FeedbacksCardList";
 import Navbar from "./navbar/Navbar";
 import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 import { useSession } from "next-auth/react";
+import LoadingSpinner from "./loading/LoadingSpinner";
+import LoadingRedirect from "@/app/loading";
 
 const Dashboard = ({ feedbacksAPI }: any) => {
   const [toggleCategory, setToggleCategory] = useState("All");
   const [option, setSortby] = useState("Most Upvotes");
   const [showOptions, setSortbyOptions] = useState(false);
   const categories = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
-  const { data: status } = useSession({
+  const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       redirectToSignIn();
     },
   });
-  console.log(status);
+
+  if (status == "loading") {
+    return <LoadingRedirect />;
+  }
 
   const feedbacks = feedbacksAPI;
 
