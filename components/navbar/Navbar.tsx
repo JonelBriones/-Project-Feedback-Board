@@ -1,15 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import MobileDashboardView from "../dashboard/MobileDashboardView";
 import userIcon from "@/public/images/user-images/user.png";
+import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 
 const Navbar = ({ setToggleCategory, categories, toggleCategory }: any) => {
-  const { data: session, status } = useSession();
-
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirectToSignIn();
+    },
+  });
+  // const [pending,setPending] = useState(status =='loading')
   const [toggleNavbar, setToggleNavbar] = useState(false);
   console.log("SESSION:", session);
   console.log("STATUS:", status);

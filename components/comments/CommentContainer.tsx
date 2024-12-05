@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FeedbackCard from "../feedback/FeedbackCard";
 
 import AddComment from "../forms/AddComment";
@@ -11,15 +11,21 @@ const CommentContainer = ({ feedback, suggestionID }: any) => {
     id: "",
   });
 
+  useEffect(() => {
+    // window.scrollTo(0, 0);
+    const scrollToTop = document.getElementById("top");
+    scrollToTop?.scrollIntoView({ behavior: "smooth" });
+  }, [replyTo]);
+
   return (
-    <div className=" flex flex-col gap-4 overflow-hidden">
+    <div className="grid md:flex flex-col gap-4 md:overflow-hidden" id="top">
       <FeedbackCard {...feedback} />
-      <AddComment
-        suggestionID={suggestionID}
-        replyTo={replyTo}
-        setReplyTo={setReplyTo}
-      />
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto h-[calc(80vh-100px)]">
+        <AddComment
+          suggestionID={suggestionID}
+          replyTo={replyTo}
+          setReplyTo={setReplyTo}
+        />
         <Comments feedback={feedback} setReplyTo={setReplyTo} />
       </div>
     </div>

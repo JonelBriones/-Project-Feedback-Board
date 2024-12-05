@@ -1,14 +1,13 @@
 import userIcon from "@/public/images/user-images/user.png";
-import { Reply } from "@/types";
 import Image from "next/image";
 import React from "react";
 
 const ReplyCard = ({ reply, setReplyTo, id }: any) => {
-  const { imageUrl, username, content, replies, replyingToUsername } = reply;
+  const { imageUrl, username, content, replyingToUsername } = reply;
 
   return (
     <div className="flex justify-between gap-8">
-      <div>
+      <div className="flex-none">
         <Image
           src={imageUrl ? imageUrl : userIcon}
           width={40}
@@ -42,9 +41,6 @@ const ReplyCard = ({ reply, setReplyTo, id }: any) => {
             {content}
           </p>
         </div>
-        {replies?.map((reply: Reply) => (
-          <ReplyCard reply={reply} key={reply._id} />
-        ))}
       </div>
     </div>
   );

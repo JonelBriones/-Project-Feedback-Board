@@ -36,7 +36,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
         replyTo.username.length + 1
       );
     }
-  }, [replyTo.username]);
+  }, [replyTo]);
 
   return (
     <div className="p-8 bg-white rounded-lg">
@@ -92,6 +92,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
             placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
             defaultValue={data?.comment}
+            maxLength={250}
           />
         </div>
         <div className="flex justify-between place-items-center">

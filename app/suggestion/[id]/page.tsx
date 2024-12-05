@@ -25,7 +25,7 @@ const page = async ({ params }: any) => {
   const session = await auth();
 
   return (
-    <div className="md:container h-[calc(100vh-100px)] flex flex-col gap-4 overflow-auto mt-10 md:mt-0">
+    <div className="md:container  flex flex-col gap-4 overflow-auto mt-10 md:mt-0">
       <div className="flex place-items-center justify-between">
         <GoBack />
         {session?.user?.id == suggestionById?.owner && (
