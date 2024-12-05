@@ -23,7 +23,7 @@ const Dashboard = ({ feedbacksAPI }: any) => {
   });
 
   if (status == "loading") {
-    return <LoadingRedirect />;
+    return <LoadingRedirect text={"Authenticating..."} />;
   }
 
   const feedbacks = feedbacksAPI;
