@@ -6,7 +6,7 @@ import RoadmapSuggestionCardList from "./RoadmapSuggestionCardList";
 import { Feedback } from "@/types";
 
 const Roadmap = ({ feedbacksAPI }: any) => {
-  const [toggleStatusView, setToggleStatusView] = useState("In-progress");
+  const [toggleStatusView, setToggleStatusView] = useState("In-Progress");
 
   const status: any = {
     Planned: "Ideas prioritized for research",
@@ -64,7 +64,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
         <button
           onClick={() => setToggleStatusView("In-Progress")}
           className={`w-full pb-4 border-b-4 border-[#ad1fea] ${
-            "In-progress" == toggleStatusView ? "" : "border-opacity-0"
+            "In-Progress" == toggleStatusView ? "" : "border-opacity-0"
           }`}
         >
           {"In-Progress"} ({statusInProgress.length})
@@ -108,7 +108,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
       </div>
       <div className="md:hidden flex flex-col">
         <div className="flex flex-col">{renderMobileHeader()}</div>
-        <div className="mx-8">
+        <div className="mx-8 overflow-auto h-[calc(80vh-100px)] ">
           <div className="my-6">
             <h4 className="font-bold text-lg">
               {toggleStatusView} ({getStatusLength()})
@@ -116,7 +116,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
             <p className="text-[#647196]">{status[toggleStatusView]}</p>
           </div>
 
-          <div className="flex flex-col gap-4 overflow-auto min-h-[400px] h-[calc(80vh-100px)] ">
+          <div className="flex flex-col gap-4">
             {feedbacksAPI.map(
               (feedback: any) =>
                 feedback.status.toLowerCase() ==
@@ -124,7 +124,7 @@ const Roadmap = ({ feedbacksAPI }: any) => {
                   <RoadmapSuggestionCard
                     key={feedback._id}
                     {...feedback}
-                    color={"#ad1fea"}
+                    status={toggleStatusView}
                   />
                 )
             )}

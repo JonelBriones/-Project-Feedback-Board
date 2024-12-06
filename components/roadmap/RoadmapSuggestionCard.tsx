@@ -45,6 +45,7 @@ const RoadmapSuggestionCard = ({
     });
   }, [upvotes]);
 
+  console.log(status);
   return (
     <div
       key={_id}

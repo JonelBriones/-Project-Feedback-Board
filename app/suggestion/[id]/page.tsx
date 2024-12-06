@@ -22,20 +22,8 @@ const page = async ({ params }: any) => {
   }
   const suggestionById = JSON.parse(JSON.stringify(result));
 
-  const session = await auth();
-
   return (
-    <div className="md:container  flex flex-col gap-4 overflow-auto mt-10 md:mt-0">
-      <div className="flex place-items-center justify-between">
-        <GoBack />
-        {session?.user?.id == suggestionById?.owner && (
-          <LinkButton
-            text="Edit Feedback"
-            color="#4661e6"
-            url={`/suggestion/${id}/edit`}
-          />
-        )}
-      </div>
+    <div className="h-screen md:h-[calc(100vh-100px)] w-full md:container mt-0 overflow-y-auto">
       <CommentContainer feedback={suggestionById} suggestionID={id} />
     </div>
   );

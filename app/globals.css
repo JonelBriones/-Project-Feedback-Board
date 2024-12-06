@@ -17,10 +17,9 @@
 }
 
 body {
-  /* color: var(--foreground); */
-  /* background: var(--background); */
   background: #f2f4ff;
   font-family: Jost, sans-serif;
+  scroll-behavior: smooth;
 }
 
 svg {

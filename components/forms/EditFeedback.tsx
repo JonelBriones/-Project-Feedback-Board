@@ -15,8 +15,10 @@ const EditFeedback = ({ feedback }: any) => {
   const updateSuggestionById = editSuggestion.bind(null, feedback._id);
 
   return (
-    <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
-      <GoBack url={`/suggestion/${feedback._id}`} />
+    <div className="max-w-[540px] w-[100vw] md mt-10 md:mt-0">
+      <div className="hidden md:block">
+        <GoBack url={`/suggestion/${feedback._id}`} />
+      </div>
       <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
         <Image
           src={"/images/shared/icon-new-feedback.svg"}
@@ -267,7 +269,7 @@ const EditFeedback = ({ feedback }: any) => {
           </div>
           <div className="flex justify-between font-bold text-[#f2fefe] text-sm">
             <button
-              className="bg-[#e98888] rounded-xl p-3 px-5"
+              className="bg-[#e98888] rounded-xl p-3 md:p-3 md:px-5"
               onClick={() => deleteSuggestion(feedback._id)}
               type="button"
             >
@@ -276,12 +278,12 @@ const EditFeedback = ({ feedback }: any) => {
             <div className="flex gap-4">
               <Link
                 href={`/suggestion/${feedback._id}`}
-                className="bg-[#3a4374] rounded-xl p-3 px-6"
+                className="bg-[#3a4374] rounded-xl p-3 md:p-3 md:px-5"
               >
                 Cancel
               </Link>
               <button
-                className="bg-[#ad1fea] rounded-xl p-3 px-6"
+                className=" bg-[#ad1fea] rounded-xl p-3 md:p-3 md:px-5"
                 type="submit"
               >
                 Save Changes

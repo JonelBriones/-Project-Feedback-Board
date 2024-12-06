@@ -28,9 +28,14 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
       location.reload();
     }
   }, [data?.resetReply]);
+
   useEffect(() => {
     if (inputRef.current && replyTo.username) {
-      inputRef?.current.focus();
+      const scrollTop = document.getElementById("top");
+      scrollTop?.scrollIntoView({
+        behavior: "smooth",
+      });
+      inputRef?.current.focus({ preventScroll: true });
       inputRef?.current.setSelectionRange(
         replyTo.username.length + 1,
         replyTo.username.length + 1

@@ -11,7 +11,7 @@ const page = async () => {
   const feedbackAPI = await Feedback.find({}).lean();
 
   return (
-    <div className="md:container md:max-w-screen-lg">
+    <div className="md:container h-[calc(100vh-100px)]">
       <Roadmap feedbacksAPI={JSON.parse(JSON.stringify(feedbackAPI))} />
     </div>
   );
