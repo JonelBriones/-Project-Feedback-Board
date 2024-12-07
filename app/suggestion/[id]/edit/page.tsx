@@ -44,7 +44,7 @@ const page = async ({ params }: any) => {
   }
 
   return (
-    <div>
+    <div className="h-screen overflow-auto">
       <EditFeedback feedback={JSON.parse(JSON.stringify(suggestionById))} />
     </div>
   );

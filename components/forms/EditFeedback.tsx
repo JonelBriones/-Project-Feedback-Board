@@ -54,7 +54,7 @@ const EditFeedback = ({ feedback }: any) => {
             <select name="category" id="category" className="hidden">
               <option value={category}>{category}</option>
             </select>
-            <div className="relative">
+            <div className="relative flex flex-col gap-4">
               <button
                 className={`flex place-items-center justify-between p-2 px-4 w-full text-left rounded-md bg-[#f7f8fd] ${
                   showCategoryOptions ? "border-2 border-[#4661e6]" : ""
@@ -77,7 +77,7 @@ const EditFeedback = ({ feedback }: any) => {
                 </svg>
               </button>
               {showCategoryOptions && (
-                <div className="absolute w-full top-[50px] rounded-lg bg-white shadow-lg drop-shadow-lg z-10">
+                <div className="w-full rounded-lg bg-white shadow-lg drop-shadow-lg z-10">
                   <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 shadow-lg drop-shadow rounded-lg">
                     <button
                       className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-t-lg`}
@@ -173,7 +173,7 @@ const EditFeedback = ({ feedback }: any) => {
             <select name="status" id="status" className="hidden">
               <option value={status}>{status}</option>
             </select>
-            <div className="relative">
+            <div className="relative flex flex-col gap-4">
               <button
                 className={`flex place-items-center justify-between p-2 px-4 w-full text-left rounded-md bg-[#f7f8fd] ${
                   showStatusOptions ? "border-2 border-[#4661e6]" : ""
@@ -196,7 +196,7 @@ const EditFeedback = ({ feedback }: any) => {
                 </svg>
               </button>
               {showStatusOptions && (
-                <div className="absolute w-full top-[50px] rounded-lg bg-white shadow-lg drop-shadow-lg z-10">
+                <div className="w-full rounded-lg bg-white shadow-lg drop-shadow-lg z-10">
                   <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 shadow-lg drop-shadow rounded-lg">
                     <button
                       className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-t-lg`}

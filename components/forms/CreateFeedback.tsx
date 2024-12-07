@@ -33,7 +33,7 @@ const CreateFeedback = () => {
   }, [formState?.data]);
 
   return (
-    <div className="max-w-[540px] w-[100vw] mt-10 md:mt-0">
+    <div className="h-screen max-w-[540px] w-[100vw] mt-10 md:mt-0 ">
       <GoBack />
       <ToastContainer autoClose={3000} />
       <div className="mt-16 flex flex-col gap-8 relative rounded-lg bg-white p-8">
@@ -73,7 +73,7 @@ const CreateFeedback = () => {
                 {categorySelected}
               </option>
             </select>
-            <div className="relative">
+            <div className="relative flex flex-col gap-4">
               <button
                 className={`flex place-items-center p-2 px-4 w-full text-left rounded-md ${
                   showCategoryOptions ? "border-2 border-[#4661e6]" : ""
@@ -95,7 +95,7 @@ const CreateFeedback = () => {
                 </svg>
               </button>
               {showCategoryOptions && (
-                <div className="absolute w-full left-0 top-[50px] rounded-lg bg-white shadow-lg drop-shadow-lg ">
+                <div className="w-full rounded-lg bg-white shadow-lg drop-shadow-lg ">
                   <div className="flex flex-col gap-[1px] bg-[#979797] bg-opacity-15 shadow-lg drop-shadow  rounded-lg">
                     <button
                       className={`flex justify-between place-items-center w-full bg-white text-[#647196] p-4 font-normal hover:text-[#ad1fea] rounded-t-lg`}
