@@ -17,15 +17,27 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
   };
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  const [commentForm, formAction] = useActionState(
+  const [commentForm, formAction, pending] = useActionState(
     addCommentAction,
     intialState
   );
   const { data } = commentForm || {};
 
   useEffect(() => {
+    if (pending) {
+      console.log("pending", pending);
+      console.log(commentText);
+      setComment("");
+    }
+  }, [pending]);
+
+  useEffect(() => {
     if (data?.resetReply) {
-      location.reload();
+      console.log("resetting form");
+      setReplyTo({
+        username: "",
+        id: "",
+      });
     }
   }, [data?.resetReply]);
 
@@ -45,20 +57,28 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
 
   return (
     <div className="p-8 bg-white">
-      <form action={formAction} className="flex flex-col gap-2">
+      <form
+        action={formAction}
+        onSubmit={(e) => {
+          if (pending) {
+            e.preventDefault();
+          }
+        }}
+        className="flex flex-col gap-2"
+      >
         <label htmlFor="comment" className="font-bold text-black">
           Add Comment
         </label>
 
         <input
-          type="text"
+          type="hidden"
           name="suggestionID"
           id="suggestionID"
           className="hidden"
           defaultValue={suggestionID}
         />
         <input
-          type="text"
+          type="hididen"
           name="replyingTo"
           id="replyingTo"
           className="hidden"
@@ -113,6 +133,7 @@ const AddComment = ({ suggestionID, replyTo, setReplyTo }: any) => {
           </div>
           <button
             type="submit"
+            aria-disabled={pending || commentForm?.zodErrors?.comment}
             onClick={() => !session?.user?.id && redirectToSignIn()}
             className="bg-[#ad1fea] p-4 px-8 rounded-xl font-bold text-white"
           >
