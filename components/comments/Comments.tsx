@@ -2,9 +2,10 @@
 import React from "react";
 import CommentCard from "./CommentCard";
 
-const Comments = ({ feedback, setReplyTo }: any) => {
+const Comments = ({ user, feedback, setReplyTo }: any) => {
   const { comments } = feedback;
   const newestOrder = [...comments].reverse();
+
   return (
     <div className="p-8 flex flex-col gap-4 bg-white">
       <h1>{feedback.comments.length} Comments</h1>
@@ -12,8 +13,10 @@ const Comments = ({ feedback, setReplyTo }: any) => {
         <CommentCard
           key={comment._id}
           {...comment}
+          feedbackID={feedback._id}
           setReplyTo={setReplyTo}
           replyingTo={comment.replyingTo}
+          user={user}
         />
       ))}
     </div>

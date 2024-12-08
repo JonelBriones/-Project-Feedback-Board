@@ -40,7 +40,11 @@ const CommentContainer = ({ feedback, suggestionID }: any) => {
         <div className="flex justify-center">
           <div className="block h-[1px] w-[80%] bg-[#647196] opacity-20 " />
         </div>
-        <Comments feedback={feedback} setReplyTo={setReplyTo} />
+        <Comments
+          user={session?.user}
+          feedback={feedback}
+          setReplyTo={setReplyTo}
+        />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import upvoteAction from "@/app/_actions/users/upvoteAction";
 import getUpvoteStatusAction from "@/app/_actions/users/getUserUpvote";
 import redirectToSignIn from "@/app/_actions/users/redirectToSignIn";
 import LoadingSpinner from "../loading/LoadingSpinner";
+import { redirect } from "next/navigation";
 
 const FeedbackCard = ({
   _id,
@@ -44,7 +45,10 @@ const FeedbackCard = ({
     });
   }, [upvotes, session?.user?.id]);
   return (
-    <div className="flex gap-8 bg-white rounded-lg p-8">
+    <div
+      onClick={() => redirect(`/suggestion/${_id}`)}
+      className="flex gap-8 bg-white rounded-lg p-8 cursor-pointer"
+    >
       <div className="flex-shrink-0">
         {loading ? (
           <div className="flex place-items-center w-[40px] h-[60px] justify-center p-3 text-sm">
@@ -59,7 +63,10 @@ const FeedbackCard = ({
                 ? "bg-[rgb(70,97,230)] text-white"
                 : "text-[#3A4374] hover:bg-[#cfd7ff]"
             }`}
-            onClick={upvoteOnClick}
+            onClick={(e) => {
+              e.stopPropagation();
+              upvoteOnClick();
+            }}
           >
             <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -75,7 +82,7 @@ const FeedbackCard = ({
         )}
       </div>
 
-      <Link href={`/suggestion/${_id}`} className="flex justify-between w-full">
+      <div className="flex justify-between w-full">
         <div className={`flex basis-3/4 flex-col gap-2 hover:text-[#4661E6]`}>
           <h4 className="font-bold text-lg">{title}</h4>
           <p className="text-[#647196]">{description}</p>
@@ -92,7 +99,7 @@ const FeedbackCard = ({
           />
           <span>{comments.length ? comments.length : "0"}</span>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "../loading/LoadingSpinner";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const RoadmapSuggestionCard = ({
   _id,
@@ -48,8 +50,8 @@ const RoadmapSuggestionCard = ({
   console.log(status);
   return (
     <div
-      key={_id}
-      className={`flex flex-col bg-white p-6 gap-2 rounded-lg border-t-[4px] border-t-[${color}] `}
+      onClick={() => redirect(`/suggestion/${_id}`)}
+      className={`flex flex-col bg-white p-6 gap-2 rounded-lg border-t-[4px] border-t-[${color}] cursor-pointer`}
     >
       <span className="flex gap-4 place-items-center">
         <div
@@ -68,25 +70,30 @@ const RoadmapSuggestionCard = ({
             <LoadingSpinner loading={loading} size={20} />
           </div>
         ) : (
-          <button
-            className={`flex gap-3 place-items-center justify-center rounded-xl bg-[#f2f4fe] px-3 py-2 text-sm ${
-              isLiked
-                ? "bg-[rgb(70,97,230)] text-white"
-                : "text-[#3A4374] hover:bg-[#868893]"
-            }`}
-            onClick={upvoteOnClick}
-          >
-            <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M1 6l4-4 4 4"
-                stroke={isLiked ? "#fff" : "#4661e6"}
-                strokeWidth="2"
-                fill="none"
-                fillRule="evenodd"
-              />
-            </svg>
-            <span className="font-bold">{upvoteLength}</span>
-          </button>
+          <div className="relative">
+            <button
+              className={` absolute z-10 flex gap-3 place-items-center justify-center rounded-xl bg-[#f2f4fe] px-3 py-2 text-sm ${
+                isLiked
+                  ? "bg-[rgb(70,97,230)] text-white"
+                  : "text-[#3A4374] hover:bg-[#868893]"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                upvoteOnClick();
+              }}
+            >
+              <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1 6l4-4 4 4"
+                  stroke={isLiked ? "#fff" : "#4661e6"}
+                  strokeWidth="2"
+                  fill="none"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <span className="font-bold">{upvoteLength}</span>
+            </button>
+          </div>
         )}
 
         <div className="flex gap-4 place-items-center">

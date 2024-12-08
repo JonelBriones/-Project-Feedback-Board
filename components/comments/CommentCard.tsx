@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import userIcon from "@/public/images/user-images/user.png";
 import ReplyCard from "./ReplyCard";
+import { deleteComment } from "@/app/_actions/users/deleteComment";
 
 const CommentCard = ({
   imageUrl,
@@ -11,6 +12,9 @@ const CommentCard = ({
   replies,
   _id,
   setReplyTo,
+  owner,
+  user,
+  feedbackID,
 }: any) => {
   return (
     <>
@@ -28,17 +32,28 @@ const CommentCard = ({
               />
               <span className="font-bold text-[#3a4374]">{username}</span>
             </div>
-            <button
-              className="font-semibold text-[#4661e6]"
-              onClick={() =>
-                setReplyTo({
-                  username: username,
-                  id: _id,
-                })
-              }
-            >
-              Reply
-            </button>
+            <div className="flex gap-4 font-semibold">
+              {owner == user?.id && (
+                <button
+                  className="bg-[#e98888] rounded-xl p-3 md:p-3 md:px-5 text-white"
+                  onClick={() => deleteComment(feedbackID, _id)}
+                  type="button"
+                >
+                  Delete
+                </button>
+              )}
+              <button
+                className="text-[#4661e6]"
+                onClick={() =>
+                  setReplyTo({
+                    username: username,
+                    id: _id,
+                  })
+                }
+              >
+                Reply
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-4">
@@ -79,21 +94,33 @@ const CommentCard = ({
           )}
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between place-items-center">
             <div className="flex flex-col">
               <span className="font-bold text-[#3a4374]">{username}</span>
             </div>
-            <button
-              className="font-semibold text-[#4661e6]"
-              onClick={() =>
-                setReplyTo({
-                  username: username,
-                  id: _id,
-                })
-              }
-            >
-              Reply
-            </button>
+            <div className="flex gap-4 font-semibold">
+              {owner == user?.id && (
+                <button
+                  className="bg-[#e98888] rounded-xl p-3 md:p-3 md:px-5 text-white"
+                  onClick={() => deleteComment(feedbackID, _id)}
+                  type="button"
+                >
+                  Delete
+                </button>
+              )}
+
+              <button
+                className="text-[#4661e6] md:p-3 md:px-5"
+                onClick={() =>
+                  setReplyTo({
+                    username: username,
+                    id: _id,
+                  })
+                }
+              >
+                Reply
+              </button>
+            </div>
           </div>
           <p className="text-[#647196]">{content}</p>
           {replies?.map((reply: any) => (
