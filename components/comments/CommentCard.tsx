@@ -68,7 +68,8 @@ const CommentCard = ({
                       reply={reply}
                       key={reply._id}
                       setReplyTo={setReplyTo}
-                      id={_id}
+                      feedbackID={feedbackID}
+                      user={user}
                     />
                   ))}
                 </div>
@@ -128,7 +129,10 @@ const CommentCard = ({
               reply={reply}
               key={reply._id}
               setReplyTo={setReplyTo}
-              id={_id}
+              _id={reply._id}
+              user={user}
+              feedbackID={feedbackID}
+              commentID={_id}
             />
           ))}
         </div>

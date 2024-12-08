@@ -1,9 +1,18 @@
+import { deleteReply } from "@/app/_actions/users/deleteReply";
 import userIcon from "@/public/images/user-images/user.png";
 import Image from "next/image";
 import React from "react";
 
-const ReplyCard = ({ reply, setReplyTo, id }: any) => {
-  const { imageUrl, username, content, replyingToUsername } = reply;
+const ReplyCard = ({
+  _id,
+  reply,
+  setReplyTo,
+  user,
+  feedbackID,
+  commentID,
+}: any) => {
+  const { imageUrl, username, content, replyingToUsername, owner } = reply;
+  console.log("feedbackid", feedbackID);
   return (
     <div className="flex justify-between gap-4 flex-col">
       <div className="flex-none flex flex-col gap-4">
@@ -18,17 +27,29 @@ const ReplyCard = ({ reply, setReplyTo, id }: any) => {
             />
             <span className="font-bold text-[#3a4374]">{username}</span>
           </div>
-          <button
-            className="font-semibold text-[#4661e6]"
-            onClick={() =>
-              setReplyTo({
-                username: username,
-                id: id,
-              })
-            }
-          >
-            Reply
-          </button>
+          <div className="flex gap-4 font-semibold">
+            {owner == user?.id && (
+              <button
+                className="bg-[#e98888] rounded-xl p-3 md:p-3 md:px-5 text-white"
+                onClick={() => deleteReply(feedbackID, commentID, _id)}
+                type="button"
+              >
+                Delete
+              </button>
+            )}
+
+            <button
+              className="text-[#4661e6] md:p-3 md:px-5"
+              onClick={() =>
+                setReplyTo({
+                  username: username,
+                  id: commentID,
+                })
+              }
+            >
+              Reply
+            </button>
+          </div>
         </div>
       </div>
       <p className="text-[#647196] my-4">

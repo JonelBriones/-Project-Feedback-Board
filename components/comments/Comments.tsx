@@ -14,9 +14,9 @@ const Comments = ({ user, feedback, setReplyTo }: any) => {
           key={comment._id}
           {...comment}
           feedbackID={feedback._id}
+          user={user}
           setReplyTo={setReplyTo}
           replyingTo={comment.replyingTo}
-          user={user}
         />
       ))}
     </div>
